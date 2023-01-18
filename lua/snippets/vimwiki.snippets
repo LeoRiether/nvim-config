@@ -1,0 +1,87 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet imp "Math \implies"
+    \\implies
+
+snippet nat "Math natural numbers"
+    \\mathbb{N}
+
+snippet int "Math integers"
+    \\mathbb{Z}
+
+snippet O "Big-O"
+    \\mathcal{O}
+
+snippet o "small-o"
+    \\mathcal{o}
+
+snippet do "dots..."
+    \\dots
+
+snippet ex "\exists"
+    \\exists
+
+snippet c "cdot"
+    \\cdot
+
+snippet eq "Equation environment"
+    {{$
+        ${0:${VISUAL}}
+    }}$
+
+snippet align "Align environment"
+    {{$%align%
+        ${0:${VISUAL}}
+    }}$
+
+snippet mc "mathcal"
+    \\mathcal{${0}}
+snippet mb "mathbb"
+    \\mathbb{${0}}
+
+snippet f "fractions :o"
+    \\frac{${1}}{${0}}
+
+snippet co "Congruent"
+    \\equiv
+
+snippet pre "Preformatted text" 
+    {{{
+        ${0}
+    }}}
+
+snippet code "Preformatted text with a class" 
+    {{{class="brush: ${1}"
+        ${0}
+    }}}
+
+snippet mod "Modulo m"
+    \\pmod{$1}$0
+
+snippet ol "overline"
+    \\overline{$1}$0
+
+snippet leg "Símbolo de Legendre"
+    \\left( \\frac{$1}{$2} \\right)$0
