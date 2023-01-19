@@ -95,7 +95,7 @@ local plugins = {
     { 'dense-analysis/neural',
     opts = {
         -- https://beta.openai.com/account/api-keys
-        open_ai = { api_key = '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' }
+        open_ai = { api_key = os.getenv('OPENAI_KEY') }
     }, dependencies = {
         'MunifTanjim/nui.nvim',
         'ElPiloto/significant.nvim',
