@@ -1,14 +1,14 @@
 -- Setup folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--single-branch",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
 end
 vim.opt.runtimepath:prepend(lazypath)
 
@@ -22,15 +22,16 @@ end
 -- TODO: split these into multiple modules maybe?
 local plugins = {
     { 'PeterRincker/vim-argumentative', event = 'BufRead' },
-    { 'ThePrimeagen/harpoon', dependencies={'nvim-lua/plenary.nvim'}, opts={} },
+    { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
     { 'ggandor/lightspeed.nvim' },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'jiangmiao/auto-pairs' },
     { 'kshenoy/vim-signature' },
-    { 'metakirby5/codi.vim', cmd = {'Codi', 'CodiNew'} },
+    { 'metakirby5/codi.vim', cmd = { 'Codi', 'CodiNew' } },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
     { 'nvim-lualine/lualine.nvim', config = p 'statusline' },
-    { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter', build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter',
+        build = ':TSUpdate' },
     { 'tommcdo/vim-lion' },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-repeat', event = 'BufRead' },
@@ -40,50 +41,50 @@ local plugins = {
 
     -- telescope
     { 'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim',
+            'nvim-telescope/telescope-ui-select.nvim' },
         config = p 'telescope',
     },
     { 'nvim-telescope/telescope-fzf-native.nvim',
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-        lazy = true,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim', lazy = true },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- lsp
     {
         'VonHeikemen/lsp-zero.nvim',
         dependencies = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-nvim-lua'},
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
 
             -- Snippets
-            {'L3MON4D3/LuaSnip', event = 'BufRead'},
-            {'rafamadriz/friendly-snippets', event = 'BufRead'},
+            { 'L3MON4D3/LuaSnip', event = 'BufRead' },
+            { 'rafamadriz/friendly-snippets', event = 'BufRead' },
         },
         opts = p 'lsp',
-        event = {'BufRead', 'BufNew'},
+        event = { 'BufRead', 'BufNew' },
     },
 
     -- Colorschemes
-    { 'ayu-theme/ayu-vim', lazy=true },
-    { 'morhetz/gruvbox', lazy=true },
-    { 'nanotech/jellybeans.vim', lazy=true },
-    { 'bluz71/vim-nightfly-guicolors', lazy=true },
-    { 'srcery-colors/srcery-vim', lazy=true },
-    { 'pineapplegiant/spaceduck', lazy=true },
-    { 'folke/tokyonight.nvim', lazy=true, opts = { style='storm' } },
-    { 'nyoom-engineering/oxocarbon.nvim', lazy=true },
-    { 'wuelnerdotexe/vim-enfocado', lazy=true },
+    { 'ayu-theme/ayu-vim', lazy = true },
+    { 'morhetz/gruvbox', lazy = true },
+    { 'nanotech/jellybeans.vim', lazy = true },
+    { 'bluz71/vim-nightfly-guicolors', lazy = true },
+    { 'srcery-colors/srcery-vim', lazy = true },
+    { 'pineapplegiant/spaceduck', lazy = true },
+    { 'folke/tokyonight.nvim', lazy = true, opts = { style = 'storm' } },
+    { 'nyoom-engineering/oxocarbon.nvim', lazy = true },
+    { 'wuelnerdotexe/vim-enfocado', lazy = true },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -91,19 +92,19 @@ local plugins = {
 
     -- Maybe delete
     { 'folke/todo-comments.nvim', event = 'BufRead', opts = {} },
-    { 'rareitems/printer.nvim', opts = {keymap='gp'} },
+    { 'rareitems/printer.nvim', opts = { keymap = 'gp' } },
     { 'dense-analysis/neural',
-    opts = {
-        -- https://beta.openai.com/account/api-keys
-        open_ai = { api_key = os.getenv('OPENAI_KEY') }
-    }, dependencies = {
-        'MunifTanjim/nui.nvim',
-        'ElPiloto/significant.nvim',
-    } },
+        opts = {
+            -- https://beta.openai.com/account/api-keys
+            open_ai = { api_key = os.getenv('OPENAI_KEY') }
+        }, dependencies = {
+            'MunifTanjim/nui.nvim',
+            'ElPiloto/significant.nvim',
+        } },
     { "folke/persistence.nvim",
-      event = "BufReadPre", -- this will only start session saving when an actual file was opened
-      module = "persistence",
-      opts = {}, },
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        module = "persistence",
+        opts = {}, },
     { 'folke/zen-mode.nvim', opts = { window = { width = 90 } } },
     { 'hkupty/iron.nvim', config = p 'iron', cmd = 'IronRepl' },
 
@@ -133,6 +134,7 @@ local colorschemes = {
     "ayu", "gruvbox", "oxocarbon", "enfocado"
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
+colorscheme = 'enfocado' -- >:)
 vim.cmd.colorscheme(colorscheme)
 
 -- vim.g.ayucolor = 'dark'
@@ -149,4 +151,3 @@ vim.opt.background = 'dark'
 if math.random(100) < 10 then
     vim.cmd [[ DeleteOldSessions ]]
 end
-
