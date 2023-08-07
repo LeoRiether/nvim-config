@@ -24,6 +24,12 @@ local function setup_lualine()
         show_filename_only = false,
     }
 
+    local filename = {
+        'filename',
+        path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path,
+                  -- 3 = absolute path with ~ as home
+    }
+
     require("lualine").setup {
         options = {
             theme = cs,
@@ -34,8 +40,8 @@ local function setup_lualine()
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'diff', 'diagnostics' },
-            lualine_c = { 'filename', 'g:coc_status' },
-            lualine_x = { 'encoding', fileformat },
+            lualine_c = { filename },
+            lualine_x = { 'overseer', 'encoding', fileformat },
             lualine_y = { line, column, words },
             lualine_z = { 'filetype' },
         },
@@ -43,7 +49,7 @@ local function setup_lualine()
             lualine_a = { buffers, },
             lualine_z = { "tabs" },
         },
-        extensions = { "quickfix" },
+        extensions = { "quickfix", "fugitive" },
     }
 end
 

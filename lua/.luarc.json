@@ -8,6 +8,7 @@
         "i",
         "fmt",
         "rep",
-        "fmta"
+        "fmta",
+        "f"
     ]
 }

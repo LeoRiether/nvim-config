@@ -28,10 +28,18 @@ keymap('v', 'E', ":m '<-2<CR>gv=gv", {noremap=true, silent=true})
 local nxv = { 'n', 'x', 'v' }
 keymap(nxv, "<leader>d", '"_d', {noremap=true})
 keymap(nxv, "<leader>y", '"+y', {noremap=true})
+keymap(nxv, "<leader>p", '"+p', {noremap=true})
+keymap(nxv, "<leader>P", '"+P', {noremap=true})
 
 -- quickfix
-keymap('n', '<M-n>', '<cmd>cprev<cr>', {noremap=true})
-keymap('n', '<M-e>', '<cmd>cnext<cr>', {noremap=true})
+keymap('n', '<C-[>', '<cmd>copen<cr>', {noremap=true})
+keymap('n', '<M-n>', '<cmd>cnext<cr>', {noremap=true})
+keymap('n', '<M-e>', '<cmd>cprev<cr>', {noremap=true})
+keymap('n', "<C-'>", vim.diagnostic.setqflist, {silent=true})
+
+-- open :help and quickfix in vertical split
+vim.cmd [[ autocmd! FileType help wincmd L | vert resize 80 ]]
+vim.cmd [[ autocmd! FileType qf   wincmd L | vert resize 80 ]]
 
 -- ?
 keymap('n', '<leader>ca', 'gg"_cG', {noremap=true, desc='Change all'}) -- change all
@@ -40,11 +48,15 @@ keymap('v', '@', ':normal @', {noremap=true}) -- execute a macro in every line o
 keymap({ 'n', 'v' }, '<leader>ff', function() vim.lsp.buf.format() end, {noremap=true})
 command('H', 'Help', {})
 keymap('n', '<leader>lua', ':lua= ', {noremap=true})
-keymap('n', '<Tab>', 'za', {noremap=true});
-keymap('n', '<S-Tab>', 'zA', {noremap=true});
+keymap('n', '<Tab>', 'za', {noremap=true})
+keymap('n', '<S-Tab>', 'zA', {noremap=true})
+keymap('n', '-', ':e.<cr>', {noremap=true})
 
 -- insert mode mappings
 keymap('i', '<C-a>', '<esc>A', {noremap=true})
+keymap('i', '<C-j>', 'copilot#Accept("\\<CR>")', {silent=true,script=true,expr=true,replace_keycodes=false})
+keymap('i', '<M-j>', '<Plug>(copilot-next)', {silent=true})
+vim.g.copilot_no_tab_map = true
 
 -- [deprecated] header comments
 -- I now use snippets for this! (box snippet)
@@ -70,10 +82,10 @@ keymap('n', 'gwh', '<C-w>h', opts)
 keymap('n', 'gwn', '<C-w>j', opts)
 keymap('n', 'gwe', '<C-w>k', opts)
 keymap('n', 'gwi', '<C-w>l', opts)
--- keymap('n', 'gwH', '<C-w>H', opts)
--- keymap('n', 'gwN', '<C-w>J', opts)
--- keymap('n', 'gwE', '<C-w>K', opts)
--- keymap('n', 'gwI', '<C-w>L', opts)
+keymap('n', '<C-h>', '<C-w>h', opts)
+keymap('n', '<C-n>', '<C-w>j', opts)
+keymap('n', '<C-e>', '<C-w>k', opts)
+keymap('n', '<C-i>', '<C-w>l', opts)
 keymap('n', 'gwo', '<C-w>o', opts)
 keymap('n', 'gwv', '<C-w><C-v>', opts)
 keymap('n', 'gws', '<C-w><C-s>', opts)
@@ -153,13 +165,6 @@ vim.cmd([[
     au FileType fzf tunmap <Esc>
 ]])
 
--- Comments (vim-commentary)
-vim.cmd([[
-    autocmd FileType cpp    setlocal commentstring=//\ %s
-    autocmd FileType c      setlocal commentstring=//\ %s
-    autocmd FileType fsharp setlocal commentstring=//\ %s
-]])
-
 -- Clipboard (remember to install win32yank (with chocolatey) so nvim can set
 -- the + register!)
 -- vim.cmd [[command Clip silent execute "w !clip.exe"]]
@@ -194,6 +199,7 @@ keymap('n', 's', '<Plug>Lightspeed_omni_s', {noremap=true})
 
 -- Git
 keymap('n', '<leader>gb', '<cmd>GBrowse<cr>', {})
+keymap('v', '<leader>gb', "<cmd>'<,'>GBrowse<cr>", {})
 keymap('n', '<leader>gd', '<cmd>Gdiffsplit<cr>', {})
 keymap('n', '<leader>gv', '<cmd>Gvdiffsplit<cr>', {})
 
@@ -229,3 +235,28 @@ for i=1,9 do
     -- '1, '2, ...
     keymap('n', "'" .. i, function() r('harpoon.ui').nav_file(i) end, {})
 end
+
+-- very important
+keymap('n', '<leader>gol', '<cmd>CellularAutomaton game_of_life<cr>', {})
+keymap('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<cr>', {})
+
+-- ToggleTerm
+keymap('n', 'gsl', ":ToggleTermSendCurrentLine<cr>", {noremap=true, silent=true})
+keymap('v', 'gsl', ":'<,'>ToggleTermSendVisualLines<cr>gv", {noremap=true, silent=true})
+keymap('v', 'gsv', ":'<,'>ToggleTermSendVisualSelection<cr>gv", {noremap=true, silent=true})
+
+-- Overseer
+keymap('n', '<leader>oo', '<cmd>OverseerRun<cr>', {noremap=true})
+
+-- Vimwiki
+keymap('n', 'gl>', '<Plug>VimwikiIncreaseLvlSingleItem', {})
+keymap('n', 'gl<', '<Plug>VimwikiDecreaseLvlSingleItem', {})
+
+-- Trouble
+-- keymap('n', "<C-'>", '<cmd>TroubleToggle<cr>', {silent=true})
+
+-- Typst
+command('Typst', function()
+    vim.cmd[[ TermExec cmd="typst watch *.typ" ]]
+    vim.cmd[[ ! xdg-open *.pdf ]]
+end, {})

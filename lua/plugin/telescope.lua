@@ -5,6 +5,36 @@ local actions_state = require'telescope.actions.state'
 local actions = require'telescope.actions'
 local from_entry = require'telescope.from_entry'
 
+local defaults = {
+    preview = {
+        -- Use terminal image viewer to preview images
+        -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#use-terminal-image-viewer-to-preview-images
+        mime_hook = function(filepath, bufnr, opts)
+            local is_image = function(filepath)
+                local image_extensions = {'png','jpg','jpeg'}   -- Supported image formats
+                local split_path = vim.split(filepath:lower(), '.', {plain=true})
+                local extension = split_path[#split_path]
+                return vim.tbl_contains(image_extensions, extension)
+            end
+            if is_image(filepath) then
+                local term = vim.api.nvim_open_term(bufnr, {})
+                local function send_output(_, data, _ )
+                    for _, d in ipairs(data) do
+                        vim.api.nvim_chan_send(term, d..'\r\n')
+                    end
+                end
+                vim.fn.jobstart(
+                {
+                    'catimg', filepath  -- Terminal image viewer command
+                }, 
+                {on_stdout=send_output, stdout_buffered=true, pty=true})
+            else
+                require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
+            end
+        end
+    },
+}
+
 local extensions = {
     fzf = {
         fuzzy = true, -- false will only do exact matching
@@ -29,6 +59,7 @@ local function cd(prompt_bufnr)
     vim.cmd(string.format("silent lcd %s", dir))
 end
 
+-- currently O(N²) because mark.add_file checks if the file a repeat in O(N) :(
 local function add_all_to_harpoon(bufnr)
     local picker = actions_state.get_current_picker(bufnr)
     local manager = picker.manager
@@ -67,6 +98,7 @@ local pickers = {
 }
 
 telescope.setup {
+    defaults = defaults,
     extensions = extensions,
     pickers = pickers,
 }

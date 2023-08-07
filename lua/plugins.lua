@@ -23,27 +23,75 @@ end
 local plugins = {
     { 'PeterRincker/vim-argumentative', event = 'BufRead' },
     { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
-    { 'ggandor/lightspeed.nvim' },
+    { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
-    { 'jiangmiao/auto-pairs' },
-    { 'kshenoy/vim-signature' },
     { 'metakirby5/codi.vim', cmd = { 'Codi', 'CodiNew' } },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
     { 'nvim-lualine/lualine.nvim', config = p 'statusline' },
-    { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter',
-        build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter', build = ':TSUpdate' },
+    { 'stevearc/oil.nvim', opts = {} },
     { 'tommcdo/vim-lion' },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-repeat', event = 'BufRead' },
     { 'tpope/vim-rhubarb' },
     { 'tpope/vim-surround' },
-    { 'vimwiki/vimwiki', branch = 'master' },
+    { 'ixru/nvim-markdown' },
+    { 'windwp/nvim-autopairs', opts = { fast_wrap={} } },
+
+    -- flash.nvim
+    {
+        'folke/flash.nvim',
+        opts = {
+            modes = {
+                char = {
+                    jump_labels = true,
+                },
+                search = {
+                    -- when `true`, flash will be activated during regular search by default.
+                    -- You can always toggle when searching with `require("flash").toggle()`
+                    enabled = false,
+                },
+            },
+            style = 'inline',
+        },
+        event = 'VeryLazy',
+        keys = {
+            {
+                "s",
+                mode = { "n", "x", "o" },
+                function()
+                    require("flash").jump()
+                end,
+                desc = "Flash",
+            },
+            {
+                "S",
+                mode = { "n" },
+                function()
+                    require("flash").jump({
+                        pattern = vim.fn.expand("<cword>"),
+                    })
+                end,
+                desc = "Initialize flash with the word under the cursor",
+            },
+            {
+                "r",
+                mode = "o",
+                function()
+                    require("flash").remote()
+                end,
+                desc = "Remote Flash",
+            },
+        },
+    },
+
 
     -- telescope
     { 'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim',
             'nvim-telescope/telescope-ui-select.nvim' },
         config = p 'telescope',
+        event = 'VeryLazy',
     },
     { 'nvim-telescope/telescope-fzf-native.nvim',
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
@@ -59,62 +107,67 @@ local plugins = {
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
 
+            -- ...null-ls?
+            { 'jose-elias-alvarez/null-ls.nvim' },
+
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-path' },
             { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lsp', dependencies = {
+                -- Snippets
+                'rafamadriz/friendly-snippets',
+                'L3MON4D3/LuaSnip',
+            } },
             { 'hrsh7th/cmp-nvim-lua' },
 
-            -- Snippets
-            { 'L3MON4D3/LuaSnip', event = 'BufRead' },
-            { 'rafamadriz/friendly-snippets', event = 'BufRead' },
         },
-        opts = p 'lsp',
+        config = p 'lsp',
         event = { 'BufRead', 'BufNew' },
     },
 
     -- Colorschemes
     { 'ayu-theme/ayu-vim', lazy = true },
-    { 'morhetz/gruvbox', lazy = true },
     { 'nanotech/jellybeans.vim', lazy = true },
     { 'bluz71/vim-nightfly-guicolors', lazy = true },
-    { 'srcery-colors/srcery-vim', lazy = true },
     { 'pineapplegiant/spaceduck', lazy = true },
     { 'folke/tokyonight.nvim', lazy = true, opts = { style = 'storm' } },
     { 'nyoom-engineering/oxocarbon.nvim', lazy = true },
     { 'wuelnerdotexe/vim-enfocado', lazy = true },
+    { 'igorgue/danger', lazy = true, opts = { kitty=true } },
+    { 'NTBBloodbath/sweetie.nvim', lazy = true, opts = {} },
+    { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
+    { 'yonlu/omni.vim', lazy = true, opts = {} },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
     { 'mattn/emmet-vim', ft = 'html' },
+    { 'adelarsq/neofsharp.vim', ft = 'fsharp' },
+    { 'kaarmu/typst.vim', ft = 'typ', lazy=false },
 
     -- Maybe delete
-    { 'folke/todo-comments.nvim', event = 'BufRead', opts = {} },
-    { 'rareitems/printer.nvim', opts = { keymap = 'gp' } },
-    { 'dense-analysis/neural',
-        opts = {
-            -- https://beta.openai.com/account/api-keys
-            open_ai = { api_key = os.getenv('OPENAI_KEY') }
-        }, dependencies = {
-            'MunifTanjim/nui.nvim',
-            'ElPiloto/significant.nvim',
-        } },
     { "folke/persistence.nvim",
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         opts = {}, },
-    { 'folke/zen-mode.nvim', opts = { window = { width = 90 } } },
-    { 'hkupty/iron.nvim', config = p 'iron', cmd = 'IronRepl' },
+    { 'folke/zen-mode.nvim', opts = { window = { width = 102, backdrop = 1 } } },
+    -- { 'github/copilot.vim' },
+    { 'nvim-tree/nvim-web-devicons', opts = {} },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
     { 'seandewar/nvimesweeper', cmd = 'Nvimesweeper' },
+    { 'Eandrju/cellular-automaton.nvim', cmd = 'CellularAutomaton' },
 
     -- Local
     { 'LeoRiether/wasp.nvim', config = p 'wasp', dev = true },
     { dir = '~/Workspace/aoc/nvim', opts = {} },
+}
+
+-- but kept for posterity because I don't want to configure again
+local deleted = {
+    { 'akinsho/toggleterm.nvim', opts = { size=70, open_mapping=[[<C-\>]], direction='vertical' } },
 }
 
 -- ~/.config/nvim/lua/lazy
@@ -130,24 +183,30 @@ require('lazy').setup(plugins, {
 })
 
 local colorschemes = {
-    "jellybeans", "nightfly", "srcery", "spaceduck", "tokyonight",
-    "ayu", "gruvbox", "oxocarbon", "enfocado"
+    "jellybeans", "nightfly", "spaceduck", "tokyonight", "omni",
+    "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'enfocado' -- >:)
 vim.cmd.colorscheme(colorscheme)
 
 -- vim.g.ayucolor = 'dark'
 vim.opt.background = 'dark'
 
 -- Workaround for creating transparent bg
--- vim.cmd [[
---     autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
---                    \ | highlight LineNr      ctermbg=NONE guibg=NONE
---                    \ | highlight SignColumn  ctermbg=NONE guibg=NONE
---                    \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
--- ]]
+vim.cmd [[
+    autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
+                   \ | highlight NonText     ctermbg=NONE guibg=NONE
+                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
+                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+    autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE
+                   \ | highlight NonText     ctermbg=NONE guibg=NONE
+                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
+                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+]]
 
 if math.random(100) < 10 then
     vim.cmd [[ DeleteOldSessions ]]
 end
+

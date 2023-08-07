@@ -23,66 +23,54 @@
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 snippet imp "Math \implies"
-    \implies
-
-snippet nat "Math natural numbers"
-    \mathbb{N}
-
-snippet int "Math integers"
-    \mathbb{Z}
+    implies
 
 snippet O "Big-O"
-    \mathcal{O}
+    cal(O)
 
 snippet o "small-o"
-    \mathcal{o}
+    cal(o)
 
-snippet do "dots..."
-    \dots
-
-snippet ex "\exists"
-    \exists
-
-snippet c "cdot"
-    \cdot
+snippet ex "exists"
+    exists
 
 snippet eq "Equation environment"
-    {{$
-        ${0:${VISUAL}}
-    }}$
+	$ ${0} $
 
 snippet align "Align environment"
-    {{$%align%
-        ${0:${VISUAL}}
-    }}$
-
-snippet mc "mathcal"
-    \mathcal{${0}}
-snippet mb "mathbb"
-    \mathbb{${0}}
-
-snippet f "fractions :o"
-    \frac{${1}}{${0}}
-
-snippet co "Congruent"
-    \equiv
-
-snippet pre "Preformatted text" 
-    {{{
-        ${0}
-    }}}
-
-snippet code "Preformatted text with a class" 
-    {{{class="brush: ${1}"
-        ${0}
-    }}}
+	#align(${1:center})[
+		${0}
+	]
 
 snippet mod "Modulo m"
-    \pmod{$1}$0
+    mod($1)$0
 
 snippet ol "overline"
-    \overline{$1}$0
+   	overline(${1})
 
-snippet leg "Símbolo de Legendre"
-    \left( \frac{$1}{$2} \right)$0
+snippet int "Integral"
+	integral_$1^$2 $0
 
+snippet lam "lambda"
+	lambda
+
+snippet til "tilde"
+	tilde($1)
+
+snippet . "dot operation"
+	dot.op $0
+
+snippet <> "langle rangle"
+	angle.l $1 angle.r
+
+snippet inf "infinity"
+	infinity
+
+snippet t "text"
+	text("$1")$0
+
+snippet figure "#figure"
+	#figure(
+		image("$1", width: $2),
+		caption: [$3],
+	)

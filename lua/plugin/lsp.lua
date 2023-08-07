@@ -16,6 +16,26 @@ lsp.set_preferences({
   }
 })
 
+-- lspconfig.clangd.setup {
+lsp.configure('clangd', {
+    init_options = {
+      fallbackFlags = {'--std=c++20'},
+    },
+})
+
+lsp.configure('rust_analyzer', {
+    settings = {
+        ["rust-analyzer"] = {
+            checkOnSave = {
+                command = "clippy",
+            },
+        },
+    },
+})
+
+lsp.configure('typst_lsp', {
+    filetypes = { 'typst', 'typ' },
+})
 
 -- lsp mappings
 lsp.on_attach(function(client, bufnr)
@@ -55,6 +75,7 @@ luasnip.config.set_config({
 local snippets_dir = vim.fn.stdpath('config') .. '/lua/snippets'
 require("luasnip.loaders.from_lua").lazy_load({paths = snippets_dir})
 require("luasnip.loaders.from_snipmate").lazy_load({paths = snippets_dir})
+require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.cmd [[ imap <silent><expr> <C-o> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<C-o>' ]]
 
@@ -74,8 +95,12 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'path' },
+        { name = 'calc' },
+        { name = 'nvim_lsp_signature_help' },
     }, {
         { name = 'buffer' },
+        { name = 'nvim_lua' },
     }),
 
     mapping = lsp.defaults.cmp_mappings({
@@ -101,8 +126,67 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
+
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        })
     }),
 
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+
+    formatting = {
+        fields = {'menu', 'abbr', 'kind'},
+        format = function(entry, item)
+            local menu_icon ={
+                nvim_lsp = 'λ',
+                luasnip = '⋗',
+                snip = '⋗',
+                buffer = 'Ω',
+                path = '🖫',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+        end,
+    },
+})
+
+-- Mason
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
+        },
+    }
 })
 
 lsp.setup()
+
+-- diagnostics
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+local null_ls = require('null-ls')
+
+null_ls.setup({
+  sources = {
+    -- Replace these with the tools you have installed
+    null_ls.builtins.formatting.black,
+  }
+})

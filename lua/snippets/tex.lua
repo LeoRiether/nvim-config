@@ -9,7 +9,13 @@ local regular_snippets = {
     s(",*", t("\\times")),
     s(",...", t("\\dots")),
     s(",^", { t("^{"), i(1), t("}"), i(0) }),
-    s(",v", { t("\\verb|"), i(1), t("|"), i(0) }),
+    s("v", { t("\\verb|"), i(1), t("|"), i(0) }),
+
+    s("bf", { t("\\textbf{"), i(1), t("}"), i(0) }),
+    s("it", { t("\\textit{"), i(1), t("}"), i(0) }),
+    s("tt", { t("\\texttt{"), i(1), t("}"), i(0) }),
+
+    s("env", { t("\\begin{"), i(1), t({ "}", "\t" }), i(0), t({ "", "\\end{" }), rep(1), t("}") }),
 }
 
 -- I don't know how to make these work...

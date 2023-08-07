@@ -55,9 +55,20 @@ local function create_box(opts)
     }
 end
 
+local function yesterday()
+    local time = os.time() - 86400
+    return os.date("%Y-%m-%d", time)
+end
+local function tomorrow()
+    local time = os.time() + 86400
+    return os.date("%Y-%m-%d", time)
+end
+
 local snippets = {
     s('box', create_box { padding_length = 8 }),
     s('bbox', create_box { padding_length = 20 }),
+    s('tomorrow', { f(tomorrow) }),
+    s('yesterday', { f(yesterday) }),
 }
 
 local autosnippets = {
