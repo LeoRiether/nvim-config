@@ -154,6 +154,7 @@ local plugins = {
     { 'folke/zen-mode.nvim', opts = { window = { width = 102, backdrop = 1 } } },
     -- { 'github/copilot.vim' },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
+    { 'vim-test/vim-test' },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
