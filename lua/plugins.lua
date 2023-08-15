@@ -138,7 +138,6 @@ local plugins = {
     { 'igorgue/danger', lazy = true, opts = { kitty=true } },
     { 'NTBBloodbath/sweetie.nvim', lazy = true, opts = {} },
     { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
-    { 'yonlu/omni.vim', lazy = true, opts = {} },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -184,7 +183,7 @@ require('lazy').setup(plugins, {
 })
 
 local colorschemes = {
-    "jellybeans", "nightfly", "spaceduck", "tokyonight", "omni",
+    "jellybeans", "nightfly", "spaceduck", "tokyonight",
     "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
