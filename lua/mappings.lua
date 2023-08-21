@@ -260,3 +260,6 @@ command('Typst', function()
     vim.cmd[[ TermExec cmd="typst watch *.typ" ]]
     vim.cmd[[ ! xdg-open *.pdf ]]
 end, {})
+
+-- oil.nvim
+keymap('n', '<C-->', function() require('oil').open() end)
