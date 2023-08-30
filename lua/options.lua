@@ -14,9 +14,9 @@ vim.opt.smartindent = true
 vim.opt.gdefault = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
--- vim.opt.foldmethod = 'indent' -- Switch to `marker` with :FoldToggle if needed
-vim.opt.foldmethod="expr"
-vim.opt.foldexpr="nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = 'indent' -- Switch to `marker` with :FoldToggle if needed
+-- vim.opt.foldmethod="expr"
+-- vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99 -- start unfolded
 vim.opt.foldcolumn='0'
 vim.opt.number = true
@@ -97,3 +97,6 @@ vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 
 -- nvim-markdown
 vim.g.vim_markdown_math = 1
+
+-- makes vim-rhubarb work
+vim.cmd [[ command! -nargs=1 Browse silent execute '!open' shellescape(<q-args>,1) ]]

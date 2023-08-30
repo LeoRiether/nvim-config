@@ -136,7 +136,7 @@ local plugins = {
     { 'nyoom-engineering/oxocarbon.nvim', lazy = true },
     { 'wuelnerdotexe/vim-enfocado', lazy = true },
     { 'igorgue/danger', lazy = true, opts = { kitty=true } },
-    { 'NTBBloodbath/sweetie.nvim', lazy = true, opts = {} },
+    { 'NTBBloodbath/sweetie.nvim', lazy = true, config = function() vim.g.sweetie = {} end },
     { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
 
     -- Language-specific
