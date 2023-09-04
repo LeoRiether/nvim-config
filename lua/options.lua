@@ -32,6 +32,7 @@ vim.opt.termguicolors = true -- enable true colors support
 vim.opt.title = true
 vim.opt.signcolumn = "yes"
 vim.opt.titlestring = 'vi %f' -- filename
+vim.g.showtabline = 0
 
 -- netrw
 vim.g.netrw_liststyle = 3 -- tree view

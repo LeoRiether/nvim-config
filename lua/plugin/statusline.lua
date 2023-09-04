@@ -46,11 +46,12 @@ local function setup_lualine()
             lualine_z = { 'filetype' },
         },
         tabline = {
-            lualine_a = { buffers, },
-            lualine_z = { "tabs" },
+               lualine_a = { buffers, },
+               lualine_z = { "tabs" },
         },
         extensions = { "quickfix", "fugitive" },
     }
 end
 
 setup_lualine()
+

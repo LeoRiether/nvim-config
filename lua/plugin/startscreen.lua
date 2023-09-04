@@ -69,6 +69,7 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "set showtabline=0 laststatus=0 noruler",
 })
 
+local showtabline = vim.g.showtabline
 vim.api.nvim_create_autocmd("FileType", {
     group = "alpha_tabline",
     pattern = "alpha",
@@ -76,7 +77,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_create_autocmd("BufUnload", {
             group = "alpha_tabline",
             buffer = 0,
-            command = "set showtabline=2 ruler laststatus=3",
+            command = "set showtabline=" .. tostring(showtabline) .. "ruler laststatus=3",
         })
     end,
 })
