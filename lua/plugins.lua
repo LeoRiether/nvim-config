@@ -131,19 +131,20 @@ local plugins = {
     { 'ayu-theme/ayu-vim', lazy = true },
     { 'nanotech/jellybeans.vim', lazy = true },
     { 'bluz71/vim-nightfly-guicolors', lazy = true },
-    { 'pineapplegiant/spaceduck', lazy = true },
     { 'folke/tokyonight.nvim', lazy = true, opts = { style = 'storm' } },
     { 'nyoom-engineering/oxocarbon.nvim', lazy = true },
     { 'wuelnerdotexe/vim-enfocado', lazy = true },
     { 'igorgue/danger', lazy = true, opts = { kitty=true } },
     { 'NTBBloodbath/sweetie.nvim', lazy = true, config = function() vim.g.sweetie = {} end },
     { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
+    { 'mhartington/oceanic-next', lazy = true, config = function() end },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
     { 'mattn/emmet-vim', ft = 'html' },
     { 'adelarsq/neofsharp.vim', ft = 'fsharp' },
     { 'kaarmu/typst.vim', ft = 'typ', lazy=false },
+    { 'chrisbra/csv.vim', ft = 'csv' },
 
     -- Maybe delete
     { "folke/persistence.nvim",
@@ -183,7 +184,7 @@ require('lazy').setup(plugins, {
 })
 
 local colorschemes = {
-    "jellybeans", "nightfly", "spaceduck", "tokyonight",
+    "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
