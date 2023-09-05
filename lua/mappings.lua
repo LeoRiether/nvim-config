@@ -263,3 +263,8 @@ end, {})
 
 -- oil.nvim
 keymap('n', '<C-->', function() require('oil').open() end)
+
+-- Relative line numbers
+command('RelativeLineNumbers', function()
+  vim.o.relativenumber = (not vim.o.relativenumber)
+end, {})
