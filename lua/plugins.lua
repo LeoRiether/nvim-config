@@ -151,10 +151,18 @@ local plugins = {
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         opts = {}, },
-    { 'folke/zen-mode.nvim', opts = { window = { width = 102, backdrop = 1 } } },
     -- { 'github/copilot.vim' },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
     { 'vim-test/vim-test' },
+    { 'folke/noice.nvim', event = 'VeryLazy', opts = {
+        lsp = {
+            hover = { enabled = false },
+            signature = { enabled = false },
+        },
+        presets = {
+            bottom_search = true,
+        }
+    }, dependencies = { 'MunifTanjim/nui.nvim', --[[ 'rcarriga/nvim-notify'  ]]} },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
