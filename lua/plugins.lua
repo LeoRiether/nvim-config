@@ -163,6 +163,10 @@ local plugins = {
             bottom_search = true,
         }
     }, dependencies = { 'MunifTanjim/nui.nvim', --[[ 'rcarriga/nvim-notify'  ]]} },
+    { "chrisgrieser/nvim-various-textobjs",
+      lazy = false,
+      opts = { useDefaultKeymaps = true },
+    },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
