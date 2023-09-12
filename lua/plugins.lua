@@ -165,7 +165,7 @@ local plugins = {
     }, dependencies = { 'MunifTanjim/nui.nvim', --[[ 'rcarriga/nvim-notify'  ]]} },
     { "chrisgrieser/nvim-various-textobjs",
       lazy = false,
-      opts = { useDefaultKeymaps = true },
+      config = p 'textobjs',
     },
 
     -- Useless
