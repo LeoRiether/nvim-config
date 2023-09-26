@@ -42,11 +42,12 @@ lsp.on_attach(function(client, bufnr)
     local opts = { noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
     keymap('n', 'gh', function() vim.lsp.buf.hover() end, opts)
-    keymap('n', 'gd', function() vim.lsp.buf.definition() end, opts)
     keymap('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
-    keymap('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-    keymap('n', 'go', function() vim.lsp.buf.type_definition() end, opts)
-    keymap('n', 'gr', function() vim.lsp.buf.references() end, opts)
+    -- NOTE: Handled by telescope now!
+    -- keymap('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+    -- keymap('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+    -- keymap('n', 'go', function() vim.lsp.buf.type_definition() end, opts) 
+    -- keymap('n', 'gr', function() vim.lsp.buf.references() end, opts)
     keymap('n', '<F2>', function() vim.lsp.buf.rename() end, opts)
     keymap('n', '<F4>', function() vim.lsp.buf.code_action() end, opts)
     keymap('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)

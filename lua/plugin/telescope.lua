@@ -118,7 +118,10 @@ keymap('n', '<M-f>', builtin.live_grep, opts) -- no fuzzy matching, but faster
 keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-/>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-t>', builtin.treesitter, opts)
-keymap('n', '<leader>r', builtin.lsp_references, opts)
+keymap('n', 'gd', builtin.lsp_definitions, opts)
+keymap('n', 'gr', builtin.lsp_references, opts)
+keymap('n', 'gi', builtin.lsp_implementations, opts)
+keymap('n', '<C-j>', builtin.jumplist, opts)
 command('Commits', builtin.git_commits, {})
 command('Stash', builtin.git_stash, {})
 command('Checkout', builtin.git_branches, {})
@@ -128,7 +131,9 @@ command('Helptags', builtin.help_tags, {})
 command('Colors', builtin.colorscheme, {})
 command('Commands', builtin.commands, {})
 command('Qf', builtin.quickfix, {})
+command('Ft', builtin.filetypes, {})
 command('Planets', builtin.planets, {})
+command('Diagnostics', builtin.diagnostics, {})
 -- keymap('i', '<C-t>', '<Plug>(fzf-complete-path)', opts) -- ;-;
 
 -- fuzzy live_grep
