@@ -100,4 +100,4 @@ vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 vim.g.vim_markdown_math = 1
 
 -- makes vim-rhubarb work
-vim.cmd [[ command! -nargs=1 Browse silent execute '!open' shellescape(<q-args>,1) ]]
+vim.cmd [[ command! -nargs=1 Browse silent execute '!xdg-open' shellescape(<q-args>,1) ]]
