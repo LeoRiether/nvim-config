@@ -257,3 +257,9 @@ keymap('n', '<C-->', function() require('oil').open() end)
 command('RelativeLineNumbers', function()
   vim.o.relativenumber = (not vim.o.relativenumber)
 end, {})
+
+-- showtabline
+keymap('n', '<leader>tl', function() 
+  vim.o.showtabline = 2 - vim.o.showtabline
+end)
+
