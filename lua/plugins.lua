@@ -151,7 +151,7 @@ local plugins = {
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         opts = {}, },
-    -- { 'github/copilot.vim' },
+    { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
     { 'vim-test/vim-test' },
     { 'folke/noice.nvim', event = 'VeryLazy', opts = {
