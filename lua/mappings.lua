@@ -135,7 +135,7 @@ local function My_switch_resize_keys()
 end
 keymap('n', 'gwr', My_switch_resize_keys, {noremap=true, silent=true})
 
--- zoom/restor window
+-- zoom/restore window
 -- https://stackoverflow.com/a/26551079
 vim.cmd [[
     function! s:ZoomToggle() abort
@@ -153,12 +153,6 @@ vim.cmd [[
 ]]
 keymap('n', 'gwz', '<cmd>ZoomToggle<cr>', {noremap=true, silent=true})
 
--- make (but I only use it in C++)
-vim.api.nvim_create_autocmd('FileType cpp', { callback = function()
-    local opts = { noremap = true, buffer = true }
-    keymap('n', '<leader>mk', '<cmd>make<cr>', opts)
-end })
-
 -- Terminal <esc>
 vim.cmd([[
     au TermOpen * tnoremap <Esc> <c-\><c-n>
@@ -168,6 +162,7 @@ vim.cmd([[
 -- Clipboard (remember to install win32yank (with chocolatey) so nvim can set
 -- the + register!)
 -- vim.cmd [[command Clip silent execute "w !clip.exe"]]
+-- ^ I wrote this in my Windows era
 vim.cmd [[command Clip silent execute "w !xclip -selection clipboard"]]
 
 -- Remove Trailing Whitespace
@@ -245,15 +240,9 @@ keymap('n', 'gsl', ":ToggleTermSendCurrentLine<cr>", {noremap=true, silent=true}
 keymap('v', 'gsl', ":'<,'>ToggleTermSendVisualLines<cr>gv", {noremap=true, silent=true})
 keymap('v', 'gsv', ":'<,'>ToggleTermSendVisualSelection<cr>gv", {noremap=true, silent=true})
 
--- Overseer
-keymap('n', '<leader>oo', '<cmd>OverseerRun<cr>', {noremap=true})
-
 -- Vimwiki
 keymap('n', 'gl>', '<Plug>VimwikiIncreaseLvlSingleItem', {})
 keymap('n', 'gl<', '<Plug>VimwikiDecreaseLvlSingleItem', {})
-
--- Trouble
--- keymap('n', "<C-'>", '<cmd>TroubleToggle<cr>', {silent=true})
 
 -- Typst
 command('Typst', function()
