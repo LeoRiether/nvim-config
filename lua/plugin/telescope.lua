@@ -118,7 +118,7 @@ keymap('n', '<M-f>', builtin.live_grep, opts) -- no fuzzy matching, but faster
 keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-/>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-t>', builtin.treesitter, opts)
-keymap('i', '<C-s>', builtin.spell_suggest, opts)
+keymap('n', '<leader>r', builtin.lsp_references, opts)
 command('Commits', builtin.git_commits, {})
 command('Stash', builtin.git_stash, {})
 command('Checkout', builtin.git_branches, {})
