@@ -22,7 +22,7 @@ end
 -- TODO: split these into multiple modules maybe?
 local plugins = {
     { 'PeterRincker/vim-argumentative', event = 'BufRead' },
-    { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { mark_branch = true } },
+    { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } } },
     { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'metakirby5/codi.vim', cmd = { 'Codi', 'CodiNew' } },
