@@ -197,6 +197,8 @@ keymap('n', '<leader>gb', '<cmd>GBrowse<cr>', {})
 keymap('v', '<leader>gb', "<cmd>'<,'>GBrowse<cr>", {})
 keymap('n', '<leader>gd', '<cmd>Gdiffsplit<cr>', {})
 keymap('n', '<leader>gv', '<cmd>Gvdiffsplit<cr>', {})
+keymap('v', '<M-[>', "<cmd>'<,'>diffget<cr>", {})
+keymap('v', '<M-]>', "<cmd>'<,'>diffput<cr>", {})
 
 -- persistence.nvim
 keymap('n', '<leader>ss', "<cmd>lua require('persistence').load()<cr>", {})
