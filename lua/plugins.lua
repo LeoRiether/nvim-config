@@ -35,7 +35,6 @@ local plugins = {
     { 'tpope/vim-repeat', event = 'BufRead' },
     { 'tpope/vim-rhubarb' },
     { 'tpope/vim-surround' },
-    { 'ixru/nvim-markdown' },
     { 'windwp/nvim-autopairs', opts = { fast_wrap={} } },
 
     -- flash.nvim
@@ -145,6 +144,7 @@ local plugins = {
     { 'adelarsq/neofsharp.vim', ft = 'fsharp' },
     { 'kaarmu/typst.vim', ft = 'typ', lazy=false },
     { 'chrisbra/csv.vim', ft = 'csv' },
+    { 'jakewvincent/mkdnflow.nvim', rocks = 'luautf8', event = 'VeryLazy', config = p 'mkdnflow' },
 
     -- Maybe delete
     { "folke/persistence.nvim",
