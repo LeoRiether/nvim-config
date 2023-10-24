@@ -37,14 +37,14 @@ vim.g.showtabline = 0
 -- netrw
 vim.g.netrw_liststyle = 3 -- tree view
 
--- TeX
-vim.cmd [[autocmd FileType tex  setlocal textwidth=80]]
-
 -- Indent F# with spaces
 vim.cmd [[autocmd filetype fsharp set tabstop=4 shiftwidth=4 expandtab]]
 
 -- Dashboard
 vim.g.dashboard_default_executive = 'fzf'
+
+-- TeX
+vim.cmd [[autocmd FileType tex  setlocal textwidth=80]]
 
 -- VimTeX
 vim.g.vimtex_view_general_viewer = 'okular'
@@ -53,6 +53,8 @@ vim.g.vimtex_compiler_latexmk = {
     build_dir = 'texbin',
     out_dir   = 'texbin',
 }
+vim.g.vimtex_quickfix_open_on_warning = 0
+vim.g.vimtex_quickfix_ignore_filters = {}
 
 -- Codi
 vim.g['codi#interpreters'] = {
