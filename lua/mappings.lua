@@ -201,6 +201,13 @@ keymap('v', '<M-[>', "<cmd>'<,'>diffget<cr>", {})
 keymap('v', '<M-]>', "<cmd>'<,'>diffput<cr>", {})
 keymap('n', '<leader>coo', ':Git checkout ', {})
 keymap('n', '<leader>cob', ':Git checkout -b ', {})
+keymap('n', '<leader>com', function()
+  local handle = io.popen[[git branch -vv | grep -Po "^[\s\*]*\K[^\s]*(?=.*$(git branch -rl '*/HEAD' | grep -o '[^ ]\+$'))"]]
+  local main_branch = handle:read("*a")
+  handle:close()
+  vim.cmd("Git checkout " .. main_branch)
+end, {})
+keymap('n', '<leader>co-', ':Git checkout -<cr>', {})
 
 -- persistence.nvim
 keymap('n', '<leader>ss', "<cmd>lua require('persistence').load()<cr>", {})
