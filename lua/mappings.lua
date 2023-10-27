@@ -199,9 +199,8 @@ keymap('n', '<leader>gd', '<cmd>Gdiffsplit<cr>', {})
 keymap('n', '<leader>gv', '<cmd>Gvdiffsplit<cr>', {})
 keymap('v', '<M-[>', "<cmd>'<,'>diffget<cr>", {})
 keymap('v', '<M-]>', "<cmd>'<,'>diffput<cr>", {})
-keymap('n', '<leader>coo', '<cmd>Git checkout ', {})
-keymap('n', '<leader>cob', '<cmd>Git checkout -b ', {})
-keymap('n', '<leader>cop', function() vim.cmd [[ norm :Git checkout -b ]]; nvim_paste() end, {})
+keymap('n', '<leader>coo', ':Git checkout ', {})
+keymap('n', '<leader>cob', ':Git checkout -b ', {})
 
 -- persistence.nvim
 keymap('n', '<leader>ss', "<cmd>lua require('persistence').load()<cr>", {})
