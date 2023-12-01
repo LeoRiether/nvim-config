@@ -37,6 +37,8 @@ lsp.configure('typst_lsp', {
     filetypes = { 'typst', 'typ' },
 })
 
+require'lspconfig'.ocamllsp.setup{}
+
 -- lsp mappings
 lsp.on_attach(function(client, bufnr)
     local opts = { noremap = true, buffer = bufnr }
