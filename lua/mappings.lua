@@ -53,7 +53,6 @@ keymap('n', '<S-Tab>', 'zA', {noremap=true})
 keymap('n', '-', ':e.<cr>', {noremap=true})
 
 -- insert mode mappings
-keymap('i', '<C-a>', '<esc>A', {noremap=true})
 keymap('i', '<C-j>', 'copilot#Accept("\\<CR>")', {silent=true,script=true,expr=true,replace_keycodes=false})
 keymap('i', '<M-j>', '<Plug>(copilot-next)', {silent=true})
 vim.g.copilot_no_tab_map = true
