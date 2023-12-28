@@ -106,7 +106,6 @@ local plugins = {
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
 
-            -- ...null-ls?
             { 'jose-elias-alvarez/null-ls.nvim' },
 
             -- Autocompletion
