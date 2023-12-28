@@ -25,7 +25,6 @@ local plugins = {
     { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } } },
     { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
-    { 'metakirby5/codi.vim', cmd = { 'Codi', 'CodiNew' } },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
     { 'nvim-lualine/lualine.nvim', config = p 'statusline' },
     { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter', build = ':TSUpdate' },
@@ -150,9 +149,8 @@ local plugins = {
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         opts = {}, },
-    { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { } },
+    { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
-    { 'vim-test/vim-test' },
     { 'folke/noice.nvim', event = 'VeryLazy', opts = {
         lsp = {
             hover = { enabled = false },
@@ -175,11 +173,6 @@ local plugins = {
     -- Local
     { 'LeoRiether/wasp.nvim', config = p 'wasp', dev = true },
     { dir = '~/Workspace/aoc/nvim', opts = {} },
-}
-
--- but kept for posterity because I don't want to configure again
-local deleted = {
-    { 'akinsho/toggleterm.nvim', opts = { size=70, open_mapping=[[<C-\>]], direction='vertical' } },
 }
 
 -- ~/.config/nvim/lua/lazy
