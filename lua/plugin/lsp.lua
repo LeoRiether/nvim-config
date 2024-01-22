@@ -16,6 +16,8 @@ lsp.set_preferences({
   }
 })
 
+local lspconfig = require'lspconfig'
+
 -- lspconfig.clangd.setup {
 lsp.configure('clangd', {
     init_options = {
@@ -23,7 +25,11 @@ lsp.configure('clangd', {
     },
 })
 
-lsp.configure('rust_analyzer', {
+lsp.configure('typst_lsp', {
+    filetypes = { 'typst', 'typ' },
+})
+
+lspconfig.rust_analyzer.setup{
     settings = {
         ["rust-analyzer"] = {
             checkOnSave = {
@@ -31,13 +37,18 @@ lsp.configure('rust_analyzer', {
             },
         },
     },
-})
+}
 
-lsp.configure('typst_lsp', {
-    filetypes = { 'typst', 'typ' },
-})
-
-require'lspconfig'.ocamllsp.setup{}
+lspconfig.ocamllsp.setup{}
+lspconfig.tailwindcss.setup{
+    cmd = { 'bunx', 'tailwindcss-language-server', '--stdio' },
+}
+lspconfig.pyright.setup{
+    cmd = { 'bunx', 'pyright-langserver', '--stdio' },
+}
+lspconfig.tsserver.setup{
+    cmd = { 'bunx', 'typescript-language-server', '--stdio' }
+}
 
 -- lsp mappings
 lsp.on_attach(function(client, bufnr)

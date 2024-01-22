@@ -85,14 +85,15 @@ local plugins = {
 
 
     -- telescope
-    { 'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim',
-            'nvim-telescope/telescope-ui-select.nvim' },
-        config = p 'telescope',
-        event = 'VeryLazy',
+    { 'dmtrKovalenko/telescope.nvim', --[[ 'nvim-telescope/telescope.nvim' ]]
+       branch = 'feat/support-file-path-location',
+       dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim',
+                       'nvim-telescope/telescope-ui-select.nvim' },
+       config = p 'telescope',
+       event = 'VeryLazy',
     },
     { 'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+       build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
