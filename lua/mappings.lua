@@ -12,8 +12,8 @@ keymap('n', '<esc>', '<esc>:noh<cr>', {noremap=true, silent=true})
 -- Up/down/left/right
 local opts = {noremap=true}
 local nxo = { 'n', 'x', 'o' }
-keymap(nxo, 'n', 'j', opts)
-keymap(nxo, 'e', 'k', opts)
+keymap(nxo, 'n', 'gj', opts) -- :h gj
+keymap(nxo, 'e', 'gk', opts) -- :h gk
 keymap(nxo, 'i', 'l', opts)
 keymap(nxo, 'j', 'e', opts)
 keymap(nxo, 'k', 'n', opts)
