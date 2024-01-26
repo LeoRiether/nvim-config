@@ -143,7 +143,7 @@ local plugins = {
     { 'adelarsq/neofsharp.vim', ft = 'fsharp' },
     { 'kaarmu/typst.vim', ft = 'typ', lazy=false },
     { 'chrisbra/csv.vim', ft = 'csv' },
-    { 'jakewvincent/mkdnflow.nvim', rocks = 'luautf8', event = 'VeryLazy', config = p 'mkdnflow' },
+    { 'jakewvincent/mkdnflow.nvim', rocks = 'luautf8', event = { 'BufRead', 'BufNew' }, config = p 'mkdnflow' },
 
     -- Maybe delete
     { "folke/persistence.nvim",
