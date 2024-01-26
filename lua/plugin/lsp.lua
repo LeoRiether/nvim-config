@@ -1,4 +1,5 @@
-local lsp = require('lsp-zero')
+local lsp = require'lsp-zero'
+local lspconfig = require'lspconfig'
 
 lsp.set_preferences({
   suggest_lsp_servers = true,
@@ -16,19 +17,15 @@ lsp.set_preferences({
   }
 })
 
-local lspconfig = require'lspconfig'
-
--- lspconfig.clangd.setup {
-lsp.configure('clangd', {
-    init_options = {
-      fallbackFlags = {'--std=c++20'},
-    },
-})
-
 lsp.configure('typst_lsp', {
     filetypes = { 'typst', 'typ' },
 })
 
+lspconfig.clangd.setup{
+    init_options = {
+      fallbackFlags = {'--std=c++20'},
+    },
+}
 lspconfig.rust_analyzer.setup{
     settings = {
         ["rust-analyzer"] = {
@@ -44,7 +41,7 @@ lspconfig.tailwindcss.setup{
     cmd = { 'bunx', 'tailwindcss-language-server', '--stdio' },
 }
 lspconfig.pyright.setup{
-    cmd = { 'bunx', 'pyright-langserver', '--stdio' },
+    cmd = { 'pyright-langserver', '--stdio' },
 }
 lspconfig.tsserver.setup{
     cmd = { 'bunx', 'typescript-language-server', '--stdio' }
