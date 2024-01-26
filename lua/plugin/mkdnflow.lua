@@ -81,7 +81,7 @@ require('mkdnflow').setup {
         MkdnGoBack = { 'n', '<BS>' },
         MkdnGoForward = { 'n', '<Del>' },
         MkdnCreateLink = false,                                  -- see MkdnEnter
-        MkdnCreateLinkFromClipboard = { { 'n', 'v' }, '<leader>p' }, -- see MkdnEnter
+        MkdnCreateLinkFromClipboard = { { 'n', 'v' }, '<leader>mp' }, -- see MkdnEnter
         MkdnFollowLink = false,                                  -- see MkdnEnter
         MkdnDestroyLink = { 'n', '<M-CR>' },
         MkdnTagSpan = { 'v', '<M-CR>' },
