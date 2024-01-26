@@ -38,13 +38,13 @@ lspconfig.rust_analyzer.setup{
 
 lspconfig.ocamllsp.setup{}
 lspconfig.tailwindcss.setup{
-    cmd = { 'bunx', 'tailwindcss-language-server', '--stdio' },
+    cmd = { '/home/leonardo/.bun/bin/tailwindcss-language-server', '--stdio' },
 }
 lspconfig.pyright.setup{
     cmd = { 'pyright-langserver', '--stdio' },
 }
 lspconfig.tsserver.setup{
-    cmd = { 'bunx', 'typescript-language-server', '--stdio' }
+    cmd = { '/home/leonardo/.bun/bin/typescript-language-server', '--stdio' },
 }
 
 -- lsp mappings
