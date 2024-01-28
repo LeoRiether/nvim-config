@@ -152,6 +152,7 @@ local plugins = {
         opts = {}, },
     { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
+    { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
     -- { 'folke/noice.nvim', event = 'VeryLazy', opts = {
     --     lsp = {
     --         hover = { enabled = false },
