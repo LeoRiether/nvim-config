@@ -1,53 +1,109 @@
-local dashboard = require "alpha.themes.dashboard"
 math.randomseed(os.time())
 
+local leader = "SPC"
+
+--- @param sc string
+--- @param txt string
+--- @param keybind string? optional
+--- @param keybind_opts table? optional
 local function button(sc, txt, keybind, keybind_opts)
-    local b = dashboard.button(sc, txt, keybind, keybind_opts)
-    b.opts.hl = "AlphaButton"
-    b.opts.hl_shortcut = "AlphaButtonShortcut"
-    return b
+    local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+
+    local opts = {
+        position = "center",
+        shortcut = sc,
+        cursor = 3,
+        width = 50,
+        align_shortcut = "right",
+        hl = "AlphaButton",
+        hl_shortcut = "AlphaButtonShortcut",
+    }
+    if keybind then
+        keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+        opts.keymap = { "n", sc_, keybind, keybind_opts }
+    end
+
+    local function on_press()
+        local key = vim.api.nvim_replace_termcodes(keybind or sc_ .. "<Ignore>", true, false, true)
+        vim.api.nvim_feedkeys(key, "t", false)
+    end
+
+    return {
+        type = "button",
+        val = txt,
+        on_press = on_press,
+        opts = opts,
+    }
 end
 
-local function footer()
-    -- local plugins = #vim.tbl_keys(packer_plugins)
-    local plugins = require("lazy").stats().count
-    local v = vim.version()
-    local platform = vim.fn.has "win32" == 1 and "" or ""
-    return string.format(" %d   v%d.%d.%d %s", plugins, v.major, v.minor, v.patch, platform)
-end
-
--- header
-dashboard.section.header.val = require("plugin.headers").random()
-
--- date
-local datetime = os.date " %d-%m-%Y   %H:%M:%S"
-local date = {
+local header = {
     type = "text",
-    val = datetime,
+    val = require("plugin.headers").random(),
     opts = {
         position = "center",
-        hl = "Number",
+        hl = "Type",
+        -- wrap = "overflow";
     },
 }
 
--- buttons
-dashboard.section.buttons.val = {
-    button("SPC n n", "  New file", "<cmd>enew<cr>"),
-    button("SPC p p", "  Find file", "<cmd>Files<cr>"),
-    button("SPC p h", "  Recent files", "<cmd>History<cr>"),
-    -- button("SPC f f", "  Find word", "<cmd>Rg<cr>"),
-    button("SPC g b", "  Open repo", "<cmd>GBrowse<cr>"),
-    -- button("SPC s s", "  Open session", "<cmd>source Session.vim<cr>"),
-    button("SPC s s", "  Open session", "<cmd>lua require('persistence').load()<cr>"),
-    button("SPC l s", "  Update plugins", "<cmd>Lazy sync<cr>"),
-    button("q", "  Quit", "<Cmd>qa<CR>"),
+local metadata = (function()
+    local datetime = os.date " %d-%m-%Y   %H:%M:%S"
+    local platform = vim.fn.has "win32" == 1 and "" or ""
+    local v = vim.version()
+    return {
+        type = "text",
+        val = string.format("%s   v%d.%d.%d  %s",
+            datetime, v.major, v.minor, v.patch, platform),
+        opts = {
+            position = "center",
+            hl = "Number",
+        },
+    }
+end)()
+
+local function calc_plugins()
+    local stats = require("lazy").stats()
+    local ms = tostring(math.floor(stats.startuptime * 100 + 0.5) / 100)
+    return {
+        type = "text",
+        -- val = string.format(" %d plugins loaded in %sms", stats.count, ms),
+        val = string.format("󱐋 %d plugins loaded in %sms", stats.count, ms),
+        opts = {
+            position = "center",
+            hl = "Number",
+        },
+    }
+end
+
+local plugins = calc_plugins()
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'LazyVimStarted',
+    callback = function()
+        plugins.val = calc_plugins().val
+        pcall(vim.cmd.AlphaRedraw)
+    end,
+})
+
+
+local buttons = {
+    type = "group",
+    val = {
+        button("SPC n n", "  New file", "<cmd>enew<cr>"),
+        button("SPC p p", "  Find file", "<cmd>Files<cr>"),
+        button("SPC p h", "  Recent files", "<cmd>History<cr>"),
+        -- button("SPC f f", "  Find word", "<cmd>Rg<cr>"),
+        button("SPC g b", "  Open repo", "<cmd>GBrowse<cr>"),
+        -- button("SPC s s", "  Open session", "<cmd>source Session.vim<cr>"),
+        button("SPC s s", "  Open session", "<cmd>lua require('persistence').load()<cr>"),
+        button("SPC l s", "  Update plugins", "<cmd>Lazy sync<cr>"),
+        button("q", "  Quit", "<Cmd>qa<CR>"),
+    },
+    opts = {
+        spacing = 1,
+    },
 }
 
--- footer
-dashboard.section.footer.val = footer()
-dashboard.section.footer.opts.hl = dashboard.section.header.opts.hl
-
--- quote
 local quote = {
     type = "text",
     val = require "alpha.fortune" (),
@@ -57,19 +113,24 @@ local quote = {
     },
 }
 
-dashboard.config.layout = {
-    { type = "padding", val = 12 },
-    dashboard.section.header,
-    { type = "padding", val = 2 },
-    date,
-    { type = "padding", val = 1 },
-    dashboard.section.footer,
-    { type = "padding", val = 1 },
-    -- dashboard.section.buttons,
-    quote,
+local config = {
+    layout = {
+        { type = "padding", val = 12 },
+        header,
+        { type = "padding", val = 2 },
+        metadata,
+        { type = "padding", val = 1 },
+        plugins,
+        { type = "padding", val = 1 },
+        -- buttons,
+        quote,
+    },
+    opts = {
+        margin = 5,
+    },
 }
 
-require("alpha").setup(dashboard.config)
+require("alpha").setup(config)
 
 -- hide tabline and statusline on startup screen
 vim.api.nvim_create_augroup("alpha_tabline", { clear = true })
