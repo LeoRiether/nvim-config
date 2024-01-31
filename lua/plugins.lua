@@ -171,6 +171,7 @@ local plugins = {
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
     { 'seandewar/nvimesweeper', cmd = 'Nvimesweeper' },
     { 'Eandrju/cellular-automaton.nvim', cmd = 'CellularAutomaton' },
+    { 'efueyo/td.nvim', cmd = 'TDStart' },
 
     -- Local
     { 'LeoRiether/wasp.nvim', config = p 'wasp', dev = true },
