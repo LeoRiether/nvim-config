@@ -41,10 +41,14 @@ keymap('n', "<C-'>", vim.diagnostic.setqflist, {silent=true})
 vim.cmd [[ autocmd! FileType help wincmd L | vert resize 80 ]]
 vim.cmd [[ autocmd! FileType qf   wincmd L | vert resize 80 ]]
 
+-- macros
+keymap('x', '@', ':normal @', {remap=true}) -- execute a macro in every line of the visual selection
+keymap('n', 'Q', '@qn', {remap=true})
+keymap('x', 'Q', ':normal @q<CR>', {remap=true})
+
 -- ?
 keymap('n', '<leader>ca', 'gg"_cG', {noremap=true, desc='Change all'}) -- change all
 keymap('n', '<leader>ds{', 'ds{%ir\r}dde_', {desc='Delete surrounding {'}) -- delete surrounding { correctly
-keymap('v', '@', ':normal @', {noremap=true}) -- execute a macro in every line of the visual selection
 keymap({ 'n', 'v' }, '<leader>ff', function() vim.lsp.buf.format() end, {noremap=true})
 command('H', 'Help', {})
 keymap('n', '<leader>lua', ':lua= ', {noremap=true})
