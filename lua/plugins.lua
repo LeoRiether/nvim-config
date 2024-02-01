@@ -153,15 +153,6 @@ local plugins = {
     { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
     { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
-    -- { 'folke/noice.nvim', event = 'VeryLazy', opts = {
-    --     lsp = {
-    --         hover = { enabled = false },
-    --         signature = { enabled = false },
-    --     },
-    --     presets = {
-    --         bottom_search = true,
-    --     }
-    -- }, dependencies = { 'MunifTanjim/nui.nvim', --[[ 'rcarriga/nvim-notify'  ]]} },
     { "chrisgrieser/nvim-various-textobjs",
       lazy = false,
       config = p 'textobjs',
