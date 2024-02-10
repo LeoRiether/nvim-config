@@ -137,6 +137,7 @@ local plugins = {
     { 'NTBBloodbath/sweetie.nvim', lazy = true, config = function() vim.g.sweetie = {} end },
     { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
     { 'mhartington/oceanic-next', lazy = true, config = function() end },
+    { 'projekt0n/caret.nvim', lazy = true, colorscheme = true, opts = {} },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -184,7 +185,7 @@ require('lazy').setup(plugins, {
 })
 
 local colorschemes = {
-    "jellybeans", "nightfly", "tokyonight", "OceanicNext",
+    "jellybeans", "nightfly", "tokyonight", "OceanicNext", "caret",
     "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
