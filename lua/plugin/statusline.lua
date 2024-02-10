@@ -30,25 +30,45 @@ local function setup_lualine()
                   -- 3 = absolute path with ~ as home
     }
 
+    local separators = {
+        {
+            section = { left = '', right = '' },
+            component = { left = '', right = '' }
+        },
+        {
+            section = { left = "", right = "" },
+            component = { left = '\\', right = '/' },
+        },
+        {
+            section = { left = '', right = '' },
+            component = { left = '', right = '' }
+        },
+        {
+            section = { left = '', right = '' },
+            component = { left = '', right = '' }
+        },
+    }
+
     require("lualine").setup {
         options = {
             theme = cs,
             globalstatus = false,
-            component_separators = { left = '\\', right = '/' },
-            section_separators = { left = "", right = "" },
+            section_separators = separators[3].section,
+            component_separators = separators[3].component,
         },
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'diff', 'diagnostics' },
             lualine_c = { filename },
-            lualine_x = { 'overseer', 'encoding', fileformat },
+            lualine_x = { 'encoding', fileformat },
             lualine_y = { line, column, words },
             lualine_z = { 'filetype' },
         },
-        tabline = {
-               lualine_a = { buffers, },
-               lualine_z = { "tabs" },
-        },
+        tabline = {},
+        -- tabline = {
+        --        lualine_a = { buffers, },
+        --        lualine_z = { "tabs" },
+        -- },
         extensions = { "quickfix", "fugitive" },
     }
 end
