@@ -35,6 +35,7 @@ local plugins = {
     { 'tpope/vim-rhubarb' },
     { 'tpope/vim-surround' },
     { 'windwp/nvim-autopairs', opts = { fast_wrap={} } },
+    { 'LunarVim/bigfile.nvim', opts = {} },
 
     -- flash.nvim
     {
