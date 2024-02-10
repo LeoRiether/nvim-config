@@ -160,6 +160,7 @@ local plugins = {
       lazy = false,
       config = p 'textobjs',
     },
+    { 'lewis6991/gitsigns.nvim', opts = {} },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
