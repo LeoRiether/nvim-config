@@ -154,7 +154,7 @@ local plugins = {
         opts = {}, },
     { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
-    { 'projekt0n/circles.nvim', opts = { lsp = true, icons = { empty = '', filled = '', lsp_prefix = '' } }, requires = 'nvim-tree/nvim-web-devicons' },
+    { 'projekt0n/circles.nvim', opts = { lsp = true }, requires = 'nvim-tree/nvim-web-devicons' },
     { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
     { "chrisgrieser/nvim-various-textobjs",
       lazy = false,
