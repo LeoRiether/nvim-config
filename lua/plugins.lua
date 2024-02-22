@@ -139,6 +139,8 @@ local plugins = {
     { 'mhartington/oceanic-next', lazy = true, config = function() end },
     { 'projekt0n/caret.nvim', lazy = true, opts = {} },
     { 'rebelot/kanagawa.nvim', lazy = true, opts = {} },
+    { 'oxfist/night-owl.nvim', lazy = true, opts = {} },
+    { 'rose-pine/neovim', lazy = true, opts = {} },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -189,7 +191,7 @@ require('lazy').setup(plugins, {
 local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext", "caret",
     "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
-    "kanagawa",
+    "kanagawa", "night-owl", "rose-pine",
 }
 local colorscheme = colorschemes[math.random(#colorschemes)]
 vim.cmd.colorscheme(colorscheme)
