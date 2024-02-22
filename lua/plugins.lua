@@ -193,7 +193,9 @@ local colorschemes = {
     "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine",
 }
+math.randomseed(tonumber(os.date("%Y%m%d")))
 local colorscheme = colorschemes[math.random(#colorschemes)]
+math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 
 -- vim.g.ayucolor = 'dark'
