@@ -140,7 +140,7 @@ local plugins = {
     { 'projekt0n/caret.nvim', lazy = true, opts = {} },
     { 'rebelot/kanagawa.nvim', lazy = true, opts = {} },
     { 'oxfist/night-owl.nvim', lazy = true, opts = {} },
-    { 'rose-pine/neovim', lazy = true, opts = {} },
+    { 'rose-pine/neovim', lazy = true },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
