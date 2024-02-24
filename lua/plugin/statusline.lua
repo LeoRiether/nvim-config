@@ -14,8 +14,20 @@ local function setup_lualine()
         }
     }
 
-    local function line() return "L %l:%L" end
-    local function column() return "C %v" end
+    local function cursor() return "L:C %l:%v" end
+    local selection = {
+        function()
+            local isVisualMode = vim.fn.mode():find("[Vv]")
+            if not isVisualMode then return "" end
+            local starts = vim.fn.line("v")
+            local ends = vim.fn.line(".")
+            local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
+            return "V " .. tostring(lines) .. "L " .. tostring(vim.fn.wordcount().visual_chars) .. "C"
+        end,
+        cond = function()
+            return vim.fn.mode():find("[Vv]") ~= nil
+        end,
+    }
     local function words() return vim.fn.wordcount().words .. "w" end
 
     local buffers = {
@@ -30,7 +42,11 @@ local function setup_lualine()
                   -- 3 = absolute path with ~ as home
     }
 
-    local separators = {
+    local function neovim_logo()
+        return ""
+    end
+
+    local separator = ({
         {
             section = { left = '', right = '' },
             component = { left = '', right = '' }
@@ -47,21 +63,21 @@ local function setup_lualine()
             section = { left = '', right = '' },
             component = { left = '', right = '' }
         },
-    }
+    })[3]
 
     require("lualine").setup {
         options = {
             theme = cs,
             globalstatus = false,
-            section_separators = separators[3].section,
-            component_separators = separators[3].component,
+            section_separators = separator.section,
+            component_separators = separator.component,
         },
         sections = {
-            lualine_a = { 'mode' },
+            lualine_a = { neovim_logo, 'mode' },
             lualine_b = { 'branch', 'diff', 'diagnostics' },
             lualine_c = { filename },
             lualine_x = { 'encoding', fileformat },
-            lualine_y = { line, column, words },
+            lualine_y = { cursor, selection, words },
             lualine_z = { 'filetype' },
         },
         tabline = {},
