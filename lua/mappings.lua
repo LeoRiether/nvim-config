@@ -200,16 +200,18 @@ keymap('n', '<leader>gb', '<cmd>GBrowse<cr>', {})
 keymap('v', '<leader>gb', "<cmd>'<,'>GBrowse<cr>", {})
 keymap('n', '<leader>gd', '<cmd>Gdiffsplit<cr>', {})
 keymap('n', '<leader>gv', '<cmd>Gvdiffsplit<cr>', {})
-keymap('n', '<leader>coo', ':Git checkout ', {})
-keymap('n', '<leader>cob', ':Git checkout -b ', {})
+keymap('n', '<leader>coo', ':Git switch ', {})
+keymap('n', '<leader>cob', ':Git switch --create ', {})
 keymap('n', '<leader>cot', ':Telescope git_branches<cr>', {})
 keymap('n', '<leader>com', function()
   local handle = io.popen[[git branch -vv | grep -Po "^[\s\*]*\K[^\s]*(?=.*$(git branch -rl '*/HEAD' | grep -o '[^ ]\+$'))"]]
-  local main_branch = handle:read("*a")
-  handle:close()
-  vim.cmd("Git checkout " .. main_branch)
+  if handle ~= nil then
+    local main_branch = handle:read("*a")
+    handle:close()
+    vim.cmd("Git switch " .. main_branch)
+  end
 end, {})
-keymap('n', '<leader>co-', ':Git checkout -<cr>', {})
+keymap('n', '<leader>co-', ':Git switch -<cr>', {})
 
 -- persistence.nvim
 keymap('n', '<leader>ss', "<cmd>lua require('persistence').load()<cr>", {})
