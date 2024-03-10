@@ -127,7 +127,6 @@ local plugins = {
     },
 
     -- Colorschemes
-    { 'ayu-theme/ayu-vim', lazy = true },
     { 'nanotech/jellybeans.vim', lazy = true },
     { 'bluz71/vim-nightfly-guicolors', lazy = true },
     { 'folke/tokyonight.nvim', lazy = true, opts = { style = 'storm' } },
@@ -137,7 +136,6 @@ local plugins = {
     { 'NTBBloodbath/sweetie.nvim', lazy = true, config = function() vim.g.sweetie = {} end },
     { 'navarasu/onedark.nvim', lazy = true, opts = { style='warmer' } },
     { 'mhartington/oceanic-next', lazy = true, config = function() end },
-    { 'projekt0n/caret.nvim', lazy = true, opts = {} },
     { 'rebelot/kanagawa.nvim', lazy = true, opts = {} },
     { 'oxfist/night-owl.nvim', lazy = true, opts = {} },
     { 'rose-pine/neovim', lazy = true },
@@ -190,11 +188,11 @@ require('lazy').setup(plugins, {
 })
 
 local colorschemes = {
-    "jellybeans", "nightfly", "tokyonight", "OceanicNext", "caret",
-    "ayu", "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
+    "jellybeans", "nightfly", "tokyonight", "OceanicNext",
+    "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark",
 }
-math.randomseed(tonumber(os.date("%Y%m%d")))
+math.randomseed(tonumber(os.date("%Y%m%d")) + 3)
 local colorscheme = colorschemes[math.random(#colorschemes)]
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
