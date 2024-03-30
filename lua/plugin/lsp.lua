@@ -46,6 +46,7 @@ lspconfig.pyright.setup{
 lspconfig.tsserver.setup{
     cmd = { '/home/leonardo/.bun/bin/typescript-language-server', '--stdio' },
 }
+lspconfig.gleam.setup{}
 
 -- lsp mappings
 lsp.on_attach(function(client, bufnr)
