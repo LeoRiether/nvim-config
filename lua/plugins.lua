@@ -154,7 +154,7 @@ local plugins = {
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         opts = {}, },
-    { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
+    -- { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
     { 'projekt0n/circles.nvim', opts = { lsp = true }, dependencies = 'nvim-tree/nvim-web-devicons' },
     { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
