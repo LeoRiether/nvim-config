@@ -49,24 +49,32 @@ lspconfig.tsserver.setup{
 lspconfig.gleam.setup{}
 
 -- lsp mappings
-lsp.on_attach(function(client, bufnr)
-    local opts = { noremap = true, buffer = bufnr }
-    local keymap = vim.keymap.set
-    keymap('n', 'gh', function() vim.lsp.buf.hover() end, opts)
-    keymap('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
-    -- NOTE: Handled by telescope now!
-    -- keymap('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-    -- keymap('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-    -- keymap('n', 'go', function() vim.lsp.buf.type_definition() end, opts) 
-    -- keymap('n', 'gr', function() vim.lsp.buf.references() end, opts)
-    keymap('n', '<F2>', function() vim.lsp.buf.rename() end, opts)
-    keymap('n', '<F4>', function() vim.lsp.buf.code_action() end, opts)
-    keymap('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(args)
+        local opts = { noremap = true, buffer = args.buf }
+        local keymap = vim.keymap.set
+        keymap('n', 'gh', vim.lsp.buf.hover, opts)
+        keymap('n', 'gD', vim.lsp.buf.declaration, opts)
+        -- NOTE: Handled by telescope now!
+        -- keymap('n', 'gd', vim.lsp.buf.definition, opts)
+        -- keymap('n', 'gi', vim.lsp.buf.implementation, opts)
+        -- keymap('n', 'go', vim.lsp.buf.type_definition, opts) 
+        -- keymap('n', 'gr', vim.lsp.buf.references, opts)
+        keymap('n', '<F2>', vim.lsp.buf.rename, opts)
+        keymap('n', '<F4>', vim.lsp.buf.code_action, opts)
+        keymap('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+        keymap('n', ']d', vim.diagnostic.goto_next, opts)
+        keymap('n', '[d', vim.diagnostic.goto_prev, opts)
+        keymap('n', '\\d', vim.diagnostic.open_float, opts)
 
-    keymap('n', ']d', function() vim.diagnostic.goto_next() end, opts)
-    keymap('n', '[d', function() vim.diagnostic.goto_prev() end, opts)
-    keymap('n', '\\d', function() vim.diagnostic.open_float() end, opts)
-end)
+        -- inlay hints
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(args.buf, true)
+        end
+    end
+})
 
 -- Configure nvim-cmp
 local has_words_before = function()
