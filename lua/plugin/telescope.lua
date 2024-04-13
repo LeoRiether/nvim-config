@@ -123,7 +123,6 @@ keymap('n', 'gr', builtin.lsp_references, opts)
 keymap('n', 'gi', builtin.lsp_implementations, opts)
 keymap('n', 'gT', builtin.lsp_type_definitions, opts)
 keymap('n', '<C-j>', builtin.jumplist, opts)
-keymap('n', '<leader>ht', '<cmd>Telescope harpoon marks<cr>', opts)
 keymap('n', '<leader>tt', '<cmd>TodoTelescope<cr>', opts)
 command('Commits', builtin.git_commits, {})
 command('Stash', builtin.git_stash, {})
@@ -146,3 +145,25 @@ keymap('n', '<C-f>', function() builtin.grep_string {
     only_sort_text = true,
     search = ''
 } end, opts)
+
+-- harpoon
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+
+local function toggle_harpoon() toggle_telescope(require('harpoon'):list()) end
+vim.keymap.set("n", "<leader>ht", toggle_harpoon, { desc = "Open harpoon window" })
+vim.keymap.set("n", "<C-h>", toggle_harpoon, { desc = "Open harpoon window" })

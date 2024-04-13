@@ -236,14 +236,14 @@ end, {})
 
 -- harpoon
 -- TODO: move this to a harpoon config, probably
-local r = require
-keymap('n', "<leader>hh", function() r('harpoon.ui').toggle_quick_menu() end, {})
-keymap('n', "<leader>ha", function() r('harpoon.mark').add_file() end, {})
-keymap('n', "'n", function() r('harpoon.ui').nav_next() end, {})
-keymap('n', "'p", function() r('harpoon.ui').nav_prev() end, {})
+local function harpoon() return require('harpoon') end
+keymap('n', "<leader>hh", function() harpoon().ui:toggle_quick_menu(harpoon():list())  end, {})
+keymap('n', "<leader>ha", function() harpoon():list():add() end, {})
+keymap('n', "'n", function() harpoon():list():next() end, {})
+keymap('n', "'p", function() harpoon():list():prev() end, {})
 for i=1,9 do
     -- '1, '2, ...
-    keymap('n', "'" .. i, function() r('harpoon.ui').nav_file(i) end, {})
+    keymap('n', "'" .. i, function() harpoon():list():select(i) end, {})
 end
 
 -- very important

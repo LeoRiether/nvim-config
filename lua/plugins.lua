@@ -22,7 +22,11 @@ end
 -- TODO: split these into multiple modules maybe?
 local plugins = {
     { 'PeterRincker/vim-argumentative', event = 'BufRead' },
-    { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } } },
+    { 'ThePrimeagen/harpoon', branch = 'harpoon2', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } },
+        config = function ()
+            require('harpoon'):setup({})
+        end
+    },
     { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
@@ -201,18 +205,18 @@ vim.cmd.colorscheme(colorscheme)
 vim.opt.background = 'dark'
 
 -- Workaround for creating transparent bg
--- vim.cmd [[
---     autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
---                    \ | highlight NonText     ctermbg=NONE guibg=NONE
---                    \ | highlight LineNr      ctermbg=NONE guibg=NONE
---                    \ | highlight SignColumn  ctermbg=NONE guibg=NONE
---                    \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
---     autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE
---                    \ | highlight NonText     ctermbg=NONE guibg=NONE
---                    \ | highlight LineNr      ctermbg=NONE guibg=NONE
---                    \ | highlight SignColumn  ctermbg=NONE guibg=NONE
---                    \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
--- ]]
+vim.cmd [[
+    autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
+                   \ | highlight NonText     ctermbg=NONE guibg=NONE
+                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
+                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+    autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE
+                   \ | highlight NonText     ctermbg=NONE guibg=NONE
+                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
+                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+]]
 
 if math.random(100) < 10 then
     vim.cmd [[ DeleteOldSessions ]]
