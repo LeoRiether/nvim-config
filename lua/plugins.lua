@@ -142,8 +142,9 @@ local plugins = {
     { 'mhartington/oceanic-next', lazy = true, config = function() end },
     { 'rebelot/kanagawa.nvim', lazy = true, opts = {} },
     { 'oxfist/night-owl.nvim', lazy = true, opts = {} },
-    { 'rose-pine/neovim', lazy = true },
+    { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
     { 'tiagovla/tokyodark.nvim', lazy = true, opts = {} },
+    { 'catppuccin/nvim', name = "catppuccin", lazy = true, opts = {} },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -152,6 +153,7 @@ local plugins = {
     { 'kaarmu/typst.vim', ft = 'typ', lazy=false },
     { 'chrisbra/csv.vim', ft = 'csv' },
     { 'jakewvincent/mkdnflow.nvim', event = { 'BufRead', 'BufNew' }, config = p 'mkdnflow' },
+    { 'gpanders/nvim-parinfer', event = 'BufRead' },
 
     -- Maybe delete
     { "folke/persistence.nvim",
@@ -194,9 +196,9 @@ require('lazy').setup(plugins, {
 local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
-    "kanagawa", "night-owl", "rose-pine", "tokyodark",
+    "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
 }
-math.randomseed(tonumber(os.date("%Y%m%d")) + 3)
+math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)

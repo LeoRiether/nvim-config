@@ -47,6 +47,21 @@ lspconfig.tsserver.setup{
     cmd = { '/home/leonardo/.bun/bin/typescript-language-server', '--stdio' },
 }
 lspconfig.gleam.setup{}
+lspconfig.gopls.setup {
+    settings = {
+        gopls = {
+            hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            },
+        },
+    },
+}
 
 -- lsp mappings
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -63,7 +78,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- keymap('n', 'gr', vim.lsp.buf.references, opts)
         keymap('n', '<F2>', vim.lsp.buf.rename, opts)
         keymap('n', '<F4>', vim.lsp.buf.code_action, opts)
-        keymap('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+        keymap('i', '<F3>', vim.lsp.buf.signature_help, opts)
         keymap('n', ']d', vim.diagnostic.goto_next, opts)
         keymap('n', '[d', vim.diagnostic.goto_prev, opts)
         keymap('n', '\\d', vim.diagnostic.open_float, opts)
@@ -209,5 +224,6 @@ null_ls.setup({
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.fnlfmt,
   }
 })

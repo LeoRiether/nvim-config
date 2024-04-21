@@ -26,7 +26,7 @@ local defaults = {
                 vim.fn.jobstart(
                 {
                     'catimg', filepath  -- Terminal image viewer command
-                }, 
+                },
                 {on_stdout=send_output, stdout_buffered=true, pty=true})
             else
                 require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
@@ -112,7 +112,7 @@ local keymap = vim.keymap.set
 local command = vim.api.nvim_create_user_command
 local opts = { silent = true, noremap = true }
 keymap('n', '<C-p>', builtin.find_files, opts)
-keymap('n', '<C-g>', builtin.git_files, opts)
+keymap('n', '<C-g>', builtin.oldfiles, opts)
 keymap('n', '<C-b>', builtin.buffers, opts)
 keymap('n', '<M-f>', builtin.live_grep, opts) -- no fuzzy matching, but faster
 keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
@@ -166,4 +166,4 @@ end
 
 local function toggle_harpoon() toggle_telescope(require('harpoon'):list()) end
 vim.keymap.set("n", "<leader>ht", toggle_harpoon, { desc = "Open harpoon window" })
-vim.keymap.set("n", "<C-h>", toggle_harpoon, { desc = "Open harpoon window" })
+vim.keymap.set("n", "H", toggle_harpoon, { desc = "Open harpoon window" })
