@@ -88,7 +88,6 @@ local plugins = {
         },
     },
 
-
     -- telescope
     { 'dmtrKovalenko/telescope.nvim', --[[ 'nvim-telescope/telescope.nvim' ]]
        branch = 'feat/support-file-path-location',
@@ -111,7 +110,7 @@ local plugins = {
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
 
-            { 'jose-elias-alvarez/null-ls.nvim' },
+            { 'jose-elias-alvarez/null-ls.nvim' }, -- TODO: migrate to none-ls 
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
@@ -145,6 +144,7 @@ local plugins = {
     { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
     { 'tiagovla/tokyodark.nvim', lazy = true, opts = {} },
     { 'catppuccin/nvim', name = "catppuccin", lazy = true, opts = {} },
+    { 'scottmckendry/cyberdream.nvim', lazy = true, opts = { transparent = true } },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -169,6 +169,7 @@ local plugins = {
       config = p 'textobjs',
     },
     { 'lewis6991/gitsigns.nvim', opts = {} },
+    { 'rgroli/other.nvim', opts = {} },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
@@ -197,9 +198,11 @@ local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
+    "cyberdream",
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
+colorscheme = 'cyberdream'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 
