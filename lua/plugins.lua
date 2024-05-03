@@ -173,14 +173,24 @@ local plugins = {
         mappings = {
             'golang',
             {
-                pattern = "/main/(.*)/.*.java$",
+                pattern = "/main/(.*)/(.*).java$",
                 target = "/test/%1/%2Test.java",
                 context = "test",
             },
             {
-                pattern = "/main/(.*)/.*.java$",
+                pattern = "/main/(.*)/(.*).java$",
                 target = "/integration/%1/%2Test.java",
                 context = "integration",
+            },
+            {
+                pattern = "/test/(.*)/(.*)Test.java$",
+                target = "/main/%1/%2.java",
+                context = "main",
+            },
+            {
+                pattern = "/integration/(.*)/(.*)Test.java$",
+                target = "/main/%1/%2.java",
+                context = "main",
             },
         },
     } },

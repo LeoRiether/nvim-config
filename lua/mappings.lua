@@ -279,4 +279,7 @@ keymap('n', '<leader>tl', function()
 end)
 
 -- other.nvim
-keymap('n', '<leader>a', '<cmd>Other<cr>', {})
+keymap('n', '<leader>aa', '<cmd>Other<cr>', {})
+keymap('n', '<leader>at', '<cmd>Other test<cr>', {})
+keymap('n', '<leader>ai', '<cmd>Other integration<cr>', {})
+keymap('n', '<leader>ac', '<cmd>OtherClear<cr>', {})
