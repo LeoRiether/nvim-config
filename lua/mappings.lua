@@ -274,7 +274,9 @@ command('RelativeLineNumbers', function()
 end, {})
 
 -- showtabline
-keymap('n', '<leader>tl', function() 
+keymap('n', '<leader>tl', function()
   vim.o.showtabline = 2 - vim.o.showtabline
 end)
 
+-- other.nvim
+keymap('n', '<leader>a', '<cmd>Other<cr>', {})

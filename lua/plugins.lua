@@ -169,7 +169,21 @@ local plugins = {
       config = p 'textobjs',
     },
     { 'lewis6991/gitsigns.nvim', opts = {} },
-    { 'rgroli/other.nvim', opts = {} },
+    { 'rgroli/other.nvim', name = 'other-nvim', opts = {
+        mappings = {
+            'golang',
+            {
+                pattern = "/main/(.*)/.*.java$",
+                target = "/test/%1/%2Test.java",
+                context = "test",
+            },
+            {
+                pattern = "/main/(.*)/.*.java$",
+                target = "/integration/%1/%2Test.java",
+                context = "integration",
+            },
+        },
+    } },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
