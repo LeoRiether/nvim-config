@@ -82,12 +82,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         keymap('n', ']d', vim.diagnostic.goto_next, opts)
         keymap('n', '[d', vim.diagnostic.goto_prev, opts)
         keymap('n', '\\d', vim.diagnostic.open_float, opts)
-
-        -- inlay hints
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client.server_capabilities.inlayHintProvider then
-            vim.lsp.inlay_hint.enable(args.buf, true)
-        end
     end
 })
 
