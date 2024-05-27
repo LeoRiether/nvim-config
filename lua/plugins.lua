@@ -89,17 +89,16 @@ local plugins = {
     },
 
     -- telescope
-    { 'dmtrKovalenko/telescope.nvim', --[[ 'nvim-telescope/telescope.nvim' ]]
-       branch = 'feat/support-file-path-location',
-       dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim',
-                       'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope.nvim',
+       dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim',
+                        'nvim-telescope/telescope-ui-select.nvim' },
        config = p 'telescope',
        event = 'VeryLazy',
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim',
-       build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    },
     { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope-fzy-native.nvim', opts = {},
+       build = 'git clone https://github.com/romgrk/fzy-lua-native && cd fzy-lua-native && make',
+    },
 
     -- lsp
     {
