@@ -104,3 +104,6 @@ vim.g.vim_markdown_math = 1
 
 -- makes vim-rhubarb work
 vim.cmd [[ command! -nargs=1 Browse silent execute '!xdg-open' shellescape(<q-args>,1) ]]
+
+-- zig???
+vim.g.zig_fmt_autosave = 0

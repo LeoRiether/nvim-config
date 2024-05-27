@@ -226,7 +226,7 @@ local colorschemes = {
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'cyberdream'
+colorscheme = 'sweetie'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 

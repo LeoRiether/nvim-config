@@ -48,26 +48,11 @@ keymap('x', 'Q', ':normal @q<CR>', {remap=true})
 
 -- ?
 keymap('n', '<leader>ca', 'gg"_cG', {noremap=true, desc='Change all'}) -- change all
-keymap('n', '<leader>ds{', 'ds{%ir\r}dde_', {desc='Delete surrounding {'}) -- delete surrounding { correctly
 keymap({ 'n', 'v' }, '<leader>ff', function() vim.lsp.buf.format() end, {noremap=true})
 command('H', 'Help', {})
-keymap('n', '<leader>lua', ':lua= ', {noremap=true})
 keymap('n', '<Tab>', 'za', {noremap=true})
 keymap('n', '<S-Tab>', 'zA', {noremap=true})
 keymap('n', '-', ':e.<cr>', {noremap=true})
-
--- insert mode mappings
-keymap('i', '<C-j>', 'copilot#Accept("\\<CR>")', {silent=true,script=true,expr=true,replace_keycodes=false})
-keymap('i', '<M-j>', '<Plug>(copilot-next)', {silent=true})
-vim.g.copilot_no_tab_map = true
-
--- [deprecated] header comments
--- I now use snippets for this! (box snippet)
-keymap('n', 'gch#', 'O<esc>80a#<esc>yynpe<cmd>center 80<cr>0r#80A <esc>80|r#iD0n', {})
-keymap('n', 'gch%', 'O<esc>80a%<esc>yynpe<cmd>center 80<cr>0r%80A <esc>80|r%iD0n', {})
-keymap('n', 'gch;', 'O<esc>80a;<esc>yynpe<cmd>center 80<cr>0r;80A <esc>80|r;iD0n', {})
-keymap('n', 'gch-', 'O<esc>80a-<esc>yynpe<cmd>center 80<cr>0r-ir-80A <esc>80|r-hr-iiD0n', {})
-keymap('n', 'gch/', 'O<esc>80a/<esc>yynpe<cmd>center 80<cr>0r/ir/80A <esc>80|r/hr/iiD0n', {})
 
 -- vim-argumentative
 keymap('x', 'l,', '<Plug>Argumentative_InnerTextObject', {})
@@ -76,11 +61,7 @@ keymap('n', 'K', 'N', {noremap=true})
 keymap('n', 'L', 'I', {noremap=true})
 
 -- Window resizing and switching
-local opts = { noremap=true, silent=true }
--- keymap('n', '<C-h>', ':vertical resize -5<cr>', opts)
--- keymap('n', '<C-n>', ':resize +5<cr>', opts)
--- keymap('n', '<C-e>', ':resize -5<cr>', opts)
--- keymap('n', '<C-i>', ':vertical resize +5<cr>', opts)
+opts = { noremap=true, silent=true }
 keymap('n', 'gwh', '<C-w>h', opts)
 keymap('n', 'gwn', '<C-w>j', opts)
 keymap('n', 'gwe', '<C-w>k', opts)
@@ -170,11 +151,11 @@ vim.cmd [[command Clip silent execute "w !xclip -selection clipboard"]]
 
 -- Remove Trailing Whitespace
 vim.cmd([[
-function TrimWhitespace()
-	%s/\s\+$//e
-	noh
-endfunction
-command! TrimWhitespace call TrimWhitespace()
+    function TrimWhitespace()
+        %s/\s\+$//e
+        noh
+    endfunction
+    command! TrimWhitespace call TrimWhitespace()
 ]])
 
 local function fold_toggle()
@@ -189,29 +170,17 @@ vim.api.nvim_create_user_command('FoldToggle', fold_toggle, {})
 
 -- lazy.nvim
 keymap('n', '<leader>ls', '<cmd>Lazy sync<cr>', {})
-keymap('n', '<leader>lc', '<cmd>Lazy clean<cr>', {})
 
--- lightspeed (will I ever move to leap.nvim?)
+-- lightspeed
 keymap('n', 's', '<Plug>Lightspeed_omni_s', {noremap=true})
--- keymap('n', 'gs', '<Plug>Lightspeed_omni_gs', {noremap=true})
 
--- Git
+-- Git / fugitive
 keymap('n', '<leader>gb', '<cmd>GBrowse<cr>', {})
 keymap('v', '<leader>gb', "<cmd>'<,'>GBrowse<cr>", {})
-keymap('n', '<leader>gd', '<cmd>Gdiffsplit<cr>', {})
 keymap('n', '<leader>gv', '<cmd>Gvdiffsplit<cr>', {})
 keymap('n', '<leader>coo', ':Git switch ', {})
 keymap('n', '<leader>cob', ':Git switch --create ', {})
 keymap('n', '<leader>cot', ':Telescope git_branches<cr>', {})
-keymap('n', '<leader>com', function()
-  local handle = io.popen[[git branch -vv | grep -Po "^[\s\*]*\K[^\s]*(?=.*$(git branch -rl '*/HEAD' | grep -o '[^ ]\+$'))"]]
-  if handle ~= nil then
-    local main_branch = handle:read("*a")
-    handle:close()
-    vim.cmd("Git switch " .. main_branch)
-  end
-end, {})
-keymap('n', '<leader>co-', ':Git switch -<cr>', {})
 
 -- persistence.nvim
 keymap('n', '<leader>ss', "<cmd>lua require('persistence').load()<cr>", {})
@@ -239,8 +208,6 @@ end, {})
 local function harpoon() return require('harpoon') end
 keymap('n', "<leader>hh", function() harpoon().ui:toggle_quick_menu(harpoon():list())  end, {})
 keymap('n', "<leader>ha", function() harpoon():list():add() end, {})
-keymap('n', "'n", function() harpoon():list():next() end, {})
-keymap('n', "'p", function() harpoon():list():prev() end, {})
 for i=1,9 do
     -- '1, '2, ...
     keymap('n', "'" .. i, function() harpoon():list():select(i) end, {})
@@ -249,11 +216,6 @@ end
 -- very important
 keymap('n', '<leader>gol', '<cmd>CellularAutomaton game_of_life<cr>', {})
 keymap('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<cr>', {})
-
--- ToggleTerm
-keymap('n', 'gsl', ":ToggleTermSendCurrentLine<cr>", {noremap=true, silent=true})
-keymap('v', 'gsl', ":'<,'>ToggleTermSendVisualLines<cr>gv", {noremap=true, silent=true})
-keymap('v', 'gsv', ":'<,'>ToggleTermSendVisualSelection<cr>gv", {noremap=true, silent=true})
 
 -- Vimwiki
 keymap('n', 'gl>', '<Plug>VimwikiIncreaseLvlSingleItem', {})
@@ -283,3 +245,4 @@ keymap('n', '<leader>aa', '<cmd>Other<cr>', {})
 keymap('n', '<leader>at', '<cmd>Other test<cr>', {})
 keymap('n', '<leader>ai', '<cmd>Other integration<cr>', {})
 keymap('n', '<leader>ac', '<cmd>OtherClear<cr>', {})
+
