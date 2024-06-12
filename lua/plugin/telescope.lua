@@ -33,7 +33,7 @@ local defaults = {
             end
         end
     },
-    path_display = { "filename_first" },
+    path_display = { filename_first = {} },
 }
 
 local extensions = {

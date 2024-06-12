@@ -109,8 +109,6 @@ local plugins = {
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
 
-            { 'jose-elias-alvarez/null-ls.nvim' }, -- TODO: migrate to none-ls 
-
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-buffer' },
