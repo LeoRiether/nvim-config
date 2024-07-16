@@ -108,6 +108,7 @@ telescope.setup {
 telescope.load_extension("fzy_native")
 telescope.load_extension("harpoon")
 telescope.load_extension("ui-select")
+telescope.load_extension("git_worktree")
 
 local keymap = vim.keymap.set
 local command = vim.api.nvim_create_user_command
@@ -125,6 +126,8 @@ keymap('n', 'gi', builtin.lsp_implementations, opts)
 keymap('n', 'gT', builtin.lsp_type_definitions, opts)
 keymap('n', '<C-j>', builtin.jumplist, opts)
 keymap('n', '<leader>tt', '<cmd>TodoTelescope<cr>', opts)
+keymap('n', '<leader>tw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
+keymap('n', '<leader>tW', function() require('telescope').extensions.git_worktree.create_git_worktree() end)
 command('Commits', builtin.git_commits, {})
 command('Stash', builtin.git_stash, {})
 command('Checkout', builtin.git_branches, {})

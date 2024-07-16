@@ -23,16 +23,18 @@ end
 local plugins = {
     { 'PeterRincker/vim-argumentative', event = 'BufRead' },
     { 'ThePrimeagen/harpoon', branch = 'harpoon2', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } },
-        config = function ()
-            require('harpoon'):setup({})
-        end
+        config = function () require('harpoon'):setup({}) end
     },
     { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
     { 'nvim-lualine/lualine.nvim', config = p 'statusline' },
     { 'nvim-treesitter/nvim-treesitter', event = { 'BufRead', 'BufNewFile' }, config = p 'treesitter', build = ':TSUpdate' },
-    { 'stevearc/oil.nvim', opts = {} },
+    { 'stevearc/oil.nvim', opts = {
+        keymaps = {
+            ["<C-p>"] = false,
+        }
+    } },
     { 'tommcdo/vim-lion' },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-repeat', event = 'BufRead' },
@@ -191,6 +193,7 @@ local plugins = {
             },
         },
     } },
+    { 'awerebea/git-worktree.nvim', opts = {}, branch = 'handle_changes_in_telescope_api' },
 
     -- Useless
     { 'alec-gibson/nvim-tetris', cmd = 'Tetris' },
