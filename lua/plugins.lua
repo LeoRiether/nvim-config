@@ -42,6 +42,11 @@ local plugins = {
     { 'tpope/vim-surround' },
     { 'windwp/nvim-autopairs', opts = { fast_wrap={} } },
     { 'pteroctopus/faster.nvim', opts = {} },
+    { "folke/persistence.nvim",
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        module = "persistence",
+        opts = {}, },
+    { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
 
     -- flash.nvim
     {
@@ -143,7 +148,6 @@ local plugins = {
     { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
     { 'tiagovla/tokyodark.nvim', lazy = true, opts = {} },
     { 'catppuccin/nvim', name = "catppuccin", lazy = true, opts = {} },
-    { 'scottmckendry/cyberdream.nvim', lazy = true, opts = { transparent = true } },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -155,14 +159,8 @@ local plugins = {
     { 'gpanders/nvim-parinfer', event = 'BufRead' },
 
     -- Maybe delete
-    { "folke/persistence.nvim",
-        event = "BufReadPre", -- this will only start session saving when an actual file was opened
-        module = "persistence",
-        opts = {}, },
-    -- { 'zbirenbaum/copilot.lua', event = "InsertEnter", opts = { suggestion = { auto_trigger = true } } },
     { 'nvim-tree/nvim-web-devicons', opts = {} },
     { 'projekt0n/circles.nvim', opts = { lsp = true }, dependencies = 'nvim-tree/nvim-web-devicons' },
-    { 'J-hui/fidget.nvim', event = "VeryLazy", opts = {} },
     { "chrisgrieser/nvim-various-textobjs",
       lazy = false,
       config = p 'textobjs',
@@ -203,7 +201,7 @@ local plugins = {
 
     -- Local
     { 'LeoRiether/wasp.nvim', config = p 'wasp', dev = true },
-    { dir = '~/Workspace/aoc/nvim', opts = {} },
+    { dir = '~/Workspace/aoc/nvim', name = 'aoc', opts = {} },
 }
 
 -- ~/.config/nvim/lua/lazy
@@ -222,11 +220,10 @@ local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
-    "cyberdream",
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'sweetie'
+colorscheme = 'kanagawa'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 

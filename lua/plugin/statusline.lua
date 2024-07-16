@@ -63,7 +63,11 @@ local function setup_lualine()
             section = { left = '', right = '' },
             component = { left = '', right = '' }
         },
-    })[1]
+        {
+            section = { left = "", right = "" },
+            component = { left = '', right = '' },
+        },
+    })[5]
 
     require("lualine").setup {
         options = {
