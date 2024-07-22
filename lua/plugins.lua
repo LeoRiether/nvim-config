@@ -148,6 +148,7 @@ local plugins = {
     { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
     { 'tiagovla/tokyodark.nvim', lazy = true, opts = {} },
     { 'catppuccin/nvim', name = "catppuccin", lazy = true, opts = {} },
+    { 'metalelf0/base16-black-metal-scheme', lazy = false },
 
     -- Language-specific
     { 'lervag/vimtex', ft = 'tex' },
@@ -220,10 +221,11 @@ local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
+    "base16-black-metal-mayhem",
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'kanagawa'
+colorscheme = 'base16-black-metal-immortal'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 
