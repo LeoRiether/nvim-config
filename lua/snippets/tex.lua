@@ -1,6 +1,4 @@
 local regular_snippets = {
-    s("trig", t("loaded!!")),
-
     s(",a", t("\\alpha")),
     s(",b", t("\\beta")),
     s(",D", t("\\Delta")),
