@@ -25,7 +25,13 @@ local plugins = {
     { 'ThePrimeagen/harpoon', branch = 'harpoon2', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { global_settings = { mark_branch = true } },
         config = function () require('harpoon'):setup({}) end
     },
-    { 'folke/todo-comments.nvim', event = 'BufRead', opts = { keywords = { SAFETY = { icon = " ", color = "warning" } } } },
+    { 'folke/todo-comments.nvim', event = 'BufRead', opts = {
+        keywords = {
+            SAFETY = { icon = " ", color = "warning" },
+            SECTION = { icon = "§", color = "test", alt = { "SEC", "Q", "A" } },
+            J = { icon = "", color = "warning" },
+        }
+    } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
     { 'nvim-lualine/lualine.nvim', config = p 'statusline' },
@@ -221,11 +227,11 @@ local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
-    "base16-black-metal-mayhem",
+    "base16-black-metal-dark-funeral",
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'base16-black-metal-immortal'
+colorscheme = 'catppuccin'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 
