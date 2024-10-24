@@ -43,7 +43,7 @@ vim.cmd [[ autocmd! FileType qf   wincmd L | vert resize 80 ]]
 
 -- macros
 keymap('x', '@', ':normal @', {remap=true}) -- execute a macro in every line of the visual selection
-keymap('n', 'Q', '@qn', {remap=true})
+keymap('n', 'Q', '@q', {remap=true})
 keymap('x', 'Q', ':normal @q<CR>', {remap=true})
 
 -- ?
@@ -71,7 +71,7 @@ keymap('n', '<C-n>', '<C-w>j', opts)
 keymap('n', '<C-e>', '<C-w>k', opts)
 keymap('n', '<C-i>', '<C-w>l', opts)
 keymap('n', 'gwo', '<C-w>o', opts)
-keymap('n', 'gwv', '<C-w><C-v> :vertical resize 83<cr>', opts)
+keymap('n', 'gwv', '<C-w><C-v> :vertical resize 103<cr>', opts)
 keymap('n', 'gws', '<C-w><C-s>', opts)
 
 -- Activate a 'resize mode' which is like i3's resize mode.
