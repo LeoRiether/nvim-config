@@ -30,7 +30,13 @@ local plugins = {
             SAFETY = { icon = " ", color = "warning" },
             SECTION = { icon = "§", color = "test", alt = { "SEC", "Q", "A" } },
             J = { icon = "", color = "warning" },
-        }
+        },
+        search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+        highlight = {
+          -- DONE(CX):https://github.com/folke/todo-comments.nvim/issues/10
+          -- SOLVED: https://github.com/folke/todo-comments.nvim/issues/332
+          pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
+        },
     } },
     { 'goolord/alpha-nvim', config = p 'startscreen' },
     { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
@@ -231,7 +237,7 @@ local colorschemes = {
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'catppuccin'
+colorscheme = 'tokyonight'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 

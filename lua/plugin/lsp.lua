@@ -43,7 +43,7 @@ lspconfig.tailwindcss.setup{
 lspconfig.pyright.setup{
     cmd = { 'pyright-langserver', '--stdio' },
 }
-lspconfig.tsserver.setup{
+lspconfig.ts_ls.setup{
     cmd = { '/home/leonardo/.bun/bin/typescript-language-server', '--stdio' },
 }
 lspconfig.gleam.setup{}
@@ -58,6 +58,15 @@ lspconfig.gopls.setup {
                 functionTypeParameters = true,
                 parameterNames = true,
                 rangeVariableTypes = true,
+            },
+        },
+    },
+}
+lspconfig.sourcekit.setup {
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
             },
         },
     },

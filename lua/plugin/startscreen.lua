@@ -47,7 +47,7 @@ local header = {
 }
 
 local metadata = (function()
-    local datetime = os.date " %d-%m-%Y   %H:%M:%S"
+    local datetime = os.date " %Y-%m-%d   %H:%M:%S"
     local platform = vim.fn.has "win32" == 1 and "" or ""
     local v = vim.version()
     return {
