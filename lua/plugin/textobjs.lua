@@ -1,6 +1,6 @@
 local textobjs = require 'various-textobjs';
 
-textobjs.setup { useDefaultKeymaps = false }
+textobjs.setup { keymaps = { useDefaults = false } }
 
 local keymap = vim.keymap.set
 keymap({ 'o', 'x' }, 'as', function() textobjs.subword('outer') end)

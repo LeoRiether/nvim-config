@@ -29,6 +29,7 @@ local plugins = {
         keywords = {
             SAFETY = { icon = " ", color = "warning" },
             SECTION = { icon = "§", color = "test", alt = { "SEC", "Q", "A" } },
+            DRAFT = { icon = "", color = "warning" },
             J = { icon = "", color = "warning" },
         },
         search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
@@ -170,6 +171,7 @@ local plugins = {
     { 'chrisbra/csv.vim', ft = 'csv' },
     { 'jakewvincent/mkdnflow.nvim', event = { 'BufRead', 'BufNew' }, config = p 'mkdnflow' },
     { 'gpanders/nvim-parinfer', event = 'BufRead' },
+    { 'sputnick1124/uiua.vim', ft = 'uiua' },
 
     -- Maybe delete
     { 'nvim-tree/nvim-web-devicons', opts = {} },
@@ -237,7 +239,7 @@ local colorschemes = {
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'tokyonight'
+colorscheme = 'tokyodark'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 

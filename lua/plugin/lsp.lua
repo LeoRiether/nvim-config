@@ -17,9 +17,9 @@ lsp.set_preferences({
   }
 })
 
-lsp.configure('typst_lsp', {
-    filetypes = { 'typst', 'typ' },
-})
+-- lsp.configure('typst_lsp', {
+--     filetypes = { 'typst', 'typ' },
+-- })
 
 lspconfig.clangd.setup{
     init_options = {
@@ -71,6 +71,7 @@ lspconfig.sourcekit.setup {
         },
     },
 }
+lspconfig.uiua.setup {}
 
 -- lsp mappings
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -219,4 +220,3 @@ vim.diagnostic.config({
         prefix = '',
     },
 })
-
