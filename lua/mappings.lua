@@ -53,6 +53,7 @@ command('H', 'Help', {})
 keymap('n', '<Tab>', 'za', {noremap=true})
 keymap('n', '<S-Tab>', 'zA', {noremap=true})
 keymap('n', '-', ':e.<cr>', {noremap=true})
+keymap('n', '<leader>nw', ':set nowrap<cr>', {noremap=true})
 
 -- vim-argumentative
 keymap('x', 'l,', '<Plug>Argumentative_InnerTextObject', {})
