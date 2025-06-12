@@ -115,6 +115,12 @@ telescope.load_extension("harpoon")
 telescope.load_extension("ui-select")
 telescope.load_extension("git_worktree")
 
+local function get_visual_selection()
+  vim.cmd('normal! "vy') -- Yank selection into the unnamed register
+  return vim.fn.getreg("v")
+end
+
+-- Keymaps
 local keymap = vim.keymap.set
 local command = vim.api.nvim_create_user_command
 local opts = { silent = true, noremap = true }
@@ -122,12 +128,23 @@ keymap('n', '<C-p>', builtin.find_files, opts)
 keymap('n', '<leader>fp', builtin.find_files, opts)
 keymap('n', '<leader>fb', builtin.buffers, opts)
 keymap('n', '<leader>fi', builtin.live_grep, opts) -- no fuzzy matching, but faster
+keymap('x', '<leader>fi', function()
+  builtin.live_grep {
+    default_text = get_visual_selection(),
+  }
+end, opts)
 keymap('n', '<leader>fc', function() 
   -- find class
   builtin.live_grep {
-    default_text = "(class|enum|interface|type) " 
+    default_text = "(class|enum|interface|type) ",
   }
-end, opts) 
+end, opts)
+keymap('x', '<leader>fc', function() 
+  -- find class under selection
+  builtin.live_grep {
+    default_text = "(class|enum|interface|type) " .. get_visual_selection() .. ' ',
+  }
+end, opts)
 keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-/>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-t>', builtin.treesitter, opts)
