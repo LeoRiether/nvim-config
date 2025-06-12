@@ -116,9 +116,7 @@ local plugins = {
        event = 'VeryLazy',
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-telescope/telescope-fzy-native.nvim', opts = {},
-       build = 'git clone https://github.com/romgrk/fzy-lua-native && cd fzy-lua-native && make',
-    },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
     -- lsp
     {
@@ -172,6 +170,8 @@ local plugins = {
     { 'jakewvincent/mkdnflow.nvim', event = { 'BufRead', 'BufNew' }, config = p 'mkdnflow' },
     { 'gpanders/nvim-parinfer', event = 'BufRead' },
     { 'sputnick1124/uiua.vim', ft = 'uiua' },
+    { 'adam12/ruby-lsp.nvim', ft = { 'ruby', 'eruby' }, config=true },
+    { 'mfussenegger/nvim-jdtls', ft = 'java' },
 
     -- Maybe delete
     { 'nvim-tree/nvim-web-devicons', opts = {} },
@@ -263,4 +263,3 @@ vim.cmd [[
 if math.random(100) < 10 then
     vim.cmd [[ DeleteOldSessions ]]
 end
-

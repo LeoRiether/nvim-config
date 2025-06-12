@@ -37,12 +37,17 @@ local defaults = {
 }
 
 local extensions = {
-    -- fzf = {
     fzy_native = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+    },
+    fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true,  -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
     },
 
     ["ui-select"] = {
@@ -105,7 +110,7 @@ telescope.setup {
 }
 
 -- Extensions
-telescope.load_extension("fzy_native")
+telescope.load_extension("fzf")
 telescope.load_extension("harpoon")
 telescope.load_extension("ui-select")
 telescope.load_extension("git_worktree")
@@ -114,20 +119,29 @@ local keymap = vim.keymap.set
 local command = vim.api.nvim_create_user_command
 local opts = { silent = true, noremap = true }
 keymap('n', '<C-p>', builtin.find_files, opts)
-keymap('n', '<C-g>', builtin.oldfiles, opts)
-keymap('n', '<C-b>', builtin.buffers, opts)
-keymap('n', '<M-f>', builtin.live_grep, opts) -- no fuzzy matching, but faster
+keymap('n', '<leader>fp', builtin.find_files, opts)
+keymap('n', '<leader>fb', builtin.buffers, opts)
+keymap('n', '<leader>fi', builtin.live_grep, opts) -- no fuzzy matching, but faster
+keymap('n', '<leader>fc', function() 
+  -- find class
+  builtin.live_grep {
+    default_text = "(class|enum|interface|type) " 
+  }
+end, opts) 
 keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-/>', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-t>', builtin.treesitter, opts)
 keymap('n', 'gd', builtin.lsp_definitions, opts)
+keymap('n', '<C-]>', function() vim.cmd("normal gwv"); builtin.lsp_definitions(); end, opts)
 keymap('n', 'gr', builtin.lsp_references, opts)
 keymap('n', 'gi', builtin.lsp_implementations, opts)
 keymap('n', 'gT', builtin.lsp_type_definitions, opts)
-keymap('n', '<C-j>', builtin.jumplist, opts)
-keymap('n', '<leader>tt', '<cmd>TodoTelescope<cr>', opts)
+keymap('n', '<leader>fj', builtin.jumplist, opts)
+keymap('n', '<leader>ft', '<cmd>TodoTelescope<cr>', opts)
 keymap('n', '<leader>tw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
 keymap('n', '<leader>tW', function() require('telescope').extensions.git_worktree.create_git_worktree() end)
+keymap('n', '<leader>fw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
+keymap('n', '<leader>fW', function() require('telescope').extensions.git_worktree.create_git_worktree() end)
 command('Commits', builtin.git_commits, {})
 command('Stash', builtin.git_stash, {})
 command('Checkout', builtin.git_branches, {})
@@ -169,5 +183,4 @@ local function toggle_telescope(harpoon_files)
 end
 
 local function toggle_harpoon() toggle_telescope(require('harpoon'):list()) end
-vim.keymap.set("n", "<leader>ht", toggle_harpoon, { desc = "Open harpoon window" })
-vim.keymap.set("n", "H", toggle_harpoon, { desc = "Open harpoon window" })
+vim.keymap.set("n", "<leader>fh", toggle_harpoon, { desc = "Open harpoon window" })
