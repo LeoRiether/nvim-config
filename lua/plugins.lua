@@ -217,6 +217,7 @@ local plugins = {
     -- Local
     { 'LeoRiether/wasp.nvim', config = p 'wasp', dev = true },
     { dir = '~/Workspace/aoc/nvim', name = 'aoc', opts = {} },
+    { dir = '~/.config/nvim/lua/colorschemes/bloom', dev = true },
 }
 
 -- ~/.config/nvim/lua/lazy
@@ -235,11 +236,11 @@ local colorschemes = {
     "jellybeans", "nightfly", "tokyonight", "OceanicNext",
     "oxocarbon", "enfocado", "danger", "sweetie", "onedark",
     "kanagawa", "night-owl", "rose-pine", "tokyodark", "catppuccin",
-    "base16-black-metal-dark-funeral",
+    "base16-black-metal-dark-funeral", "bloom",
 }
 math.randomseed(tonumber(os.date("%Y%m%d")) + 4)
 local colorscheme = colorschemes[math.random(#colorschemes)]
-colorscheme = 'tokyodark'
+colorscheme = 'bloom'
 math.randomseed(os.time())
 vim.cmd.colorscheme(colorscheme)
 
@@ -247,18 +248,18 @@ vim.cmd.colorscheme(colorscheme)
 vim.opt.background = 'dark'
 
 -- Workaround for creating transparent bg
-vim.cmd [[
-    autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
-                   \ | highlight NonText     ctermbg=NONE guibg=NONE
-                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
-                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
-                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
-    autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE
-                   \ | highlight NonText     ctermbg=NONE guibg=NONE
-                   \ | highlight LineNr      ctermbg=NONE guibg=NONE
-                   \ | highlight SignColumn  ctermbg=NONE guibg=NONE
-                   \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
-]]
+-- vim.cmd [[
+--     autocmd vimenter * highlight Normal      ctermbg=NONE guibg=NONE
+--                    \ | highlight NonText     ctermbg=NONE guibg=NONE
+--                    \ | highlight LineNr      ctermbg=NONE guibg=NONE
+--                    \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+--                    \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+--     autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE
+--                    \ | highlight NonText     ctermbg=NONE guibg=NONE
+--                    \ | highlight LineNr      ctermbg=NONE guibg=NONE
+--                    \ | highlight SignColumn  ctermbg=NONE guibg=NONE
+--                    \ | highlight EndOfBuffer ctermbg=NONE guibg=NONE
+-- ]]
 
 if math.random(100) < 10 then
     vim.cmd [[ DeleteOldSessions ]]
