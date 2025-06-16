@@ -171,7 +171,6 @@ local plugins = {
     { 'gpanders/nvim-parinfer', event = 'BufRead' },
     { 'sputnick1124/uiua.vim', ft = 'uiua' },
     { 'adam12/ruby-lsp.nvim', ft = { 'ruby', 'eruby' }, config=true },
-    { 'mfussenegger/nvim-jdtls', ft = 'java' },
 
     -- Maybe delete
     { 'nvim-tree/nvim-web-devicons', opts = {} },
