@@ -128,25 +128,35 @@ keymap('n', '<C-p>', builtin.find_files, opts)
 keymap('n', '<leader>fp', builtin.find_files, opts)
 keymap('n', '<leader>fb', builtin.buffers, opts)
 keymap('n', '<leader>fi', builtin.live_grep, opts) -- no fuzzy matching, but faster
-keymap('x', '<leader>fi', function()
+keymap('x', '<leader>fu', function()
   builtin.live_grep {
     default_text = get_visual_selection(),
+  }
+end, opts)
+keymap('n', '<leader>fu', function()
+  builtin.live_grep {
+    default_text = vim.fn.expand("<cword>"),
   }
 end, opts)
 keymap('n', '<leader>fc', function() 
   -- find class
   builtin.live_grep {
-    default_text = "(class|enum|interface|type) ",
+    default_text = "(class|enum|interface|record|type) "
   }
 end, opts)
-keymap('x', '<leader>fc', function() 
+keymap('n', '<leader>fx', function() 
+  -- find class with the word under cursor 
+  builtin.live_grep {
+    default_text = "(class|enum|interface|record|type) " .. vim.fn.expand("<cword>") .. ' ',
+  }
+end, opts)
+keymap('x', '<leader>fx', function() 
   -- find class under selection
   builtin.live_grep {
-    default_text = "(class|enum|interface|type) " .. get_visual_selection() .. ' ',
+    default_text = "(class|enum|interface|record|type) " .. get_visual_selection() .. ' ',
   }
 end, opts)
-keymap('n', '<C-_>', builtin.current_buffer_fuzzy_find, opts)
-keymap('n', '<C-/>', builtin.current_buffer_fuzzy_find, opts)
+keymap('n', '<leader>f/', builtin.current_buffer_fuzzy_find, opts)
 keymap('n', '<C-t>', builtin.treesitter, opts)
 keymap('n', 'gd', builtin.lsp_definitions, opts)
 keymap('n', '<C-]>', function() vim.cmd("normal gwv"); builtin.lsp_definitions(); end, opts)
@@ -154,7 +164,8 @@ keymap('n', 'gr', builtin.lsp_references, opts)
 keymap('n', 'gi', builtin.lsp_implementations, opts)
 keymap('n', 'gT', builtin.lsp_type_definitions, opts)
 keymap('n', '<leader>fj', builtin.jumplist, opts)
-keymap('n', '<leader>ft', '<cmd>TodoTelescope<cr>', opts)
+keymap('n', '<leader>fq', builtin.quickfix, {})
+keymap('n', '<leader>fT', '<cmd>TodoTelescope<cr>', opts)
 keymap('n', '<leader>tw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
 keymap('n', '<leader>tW', function() require('telescope').extensions.git_worktree.create_git_worktree() end)
 keymap('n', '<leader>fw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
@@ -167,7 +178,6 @@ command('Maps', builtin.keymaps, {})
 command('Helptags', builtin.help_tags, {})
 command('Colors', builtin.colorscheme, {})
 command('Commands', builtin.commands, {})
-command('Qf', builtin.quickfix, {})
 command('Ft', builtin.filetypes, {})
 command('Planets', builtin.planets, {})
 command('Diagnostics', builtin.diagnostics, {})

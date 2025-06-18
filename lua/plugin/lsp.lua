@@ -36,6 +36,32 @@ lspconfig.rust_analyzer.setup{
     },
 }
 
+lspconfig.gopls.setup {
+  settings = {
+    gopls = {
+      -- ["formatting.gofumpt"] = true,
+      buildFlags =  {"-tags=test"},
+      -- hints = {
+      --   assignVariableTypes = true,
+      --   compositeLiteralFields = true,
+      --   compositeLiteralTypes = true,
+      --   constantValues = true,
+      --   functionTypeParameters = true,
+      --   parameterNames = true,
+      --   rangeVariableTypes = true,
+      -- },
+    },
+  },
+  on_attach = function()
+    vim.keymap.set('n', '<leader>fi', '<cmd>GoFillStruct<cr>', {})
+  end,
+}
+lspconfig.golangci_lint_ls.setup{
+  init_options = {
+    command = { './custom-gcl', 'run', '--output.json.path=stdout', '--show-stats=false' },
+  },
+}
+
 lspconfig.ocamllsp.setup{}
 lspconfig.tailwindcss.setup{
     cmd = { '/home/leonardo/.bun/bin/tailwindcss-language-server', '--stdio' },
