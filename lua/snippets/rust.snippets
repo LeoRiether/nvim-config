@@ -54,3 +54,10 @@ snippet exec "Executor::new"
 	Executor::new(move |sim, code| {
 		${0}
 	}),
+
+snippet atest "async test"
+    #[tokio::test]
+    async fn ${1}() -> std::result::Result<(), Box<dyn std::error::Error>> {
+        ${0}
+        Ok(())
+    }
